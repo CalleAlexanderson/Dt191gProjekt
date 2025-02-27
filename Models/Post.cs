@@ -14,8 +14,8 @@ public class Post {
 
     public DateOnly Date {get; set;} = DateOnly.FromDateTime(DateTime.Now);
 
-    public User? User {get; set;}
+    public BackendUser? User {get; set;}
 
     [Required(ErrorMessage = "Ange UserId på den användare som skapar blogginlägget")]
-    public int UserId {get; set;}
+    public int UserId1 {get; set;}
 }

@@ -4,19 +4,19 @@ using Backend.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
-
 builder.Services.AddDbContext<BlogDbContext>(options =>
     options.UseMySql("Server=localhost;port=3306;Database=dt191gProjekt;User=dt191gProjekt;Password=Calle12", new MySqlServerVersion(new Version()))
 );
+
+// Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContext<BlogDbContext>(options =>
+    options.UseMySql("Server=localhost;port=3306;Database=dt191gProjekt;User=dt191gProjekt;Password=Calle12", new MySqlServerVersion(new Version())));
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<BlogDbContext>();
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
