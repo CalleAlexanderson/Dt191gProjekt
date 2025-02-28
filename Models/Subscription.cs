@@ -8,7 +8,7 @@ public class Subscription {
     public IdentityUser? User {get; set;}
 
     [Required(ErrorMessage = "Ange UserId på den användare som ska premunerera på detta blogginlägg")]
-    public int UserId {get; set;}
+    public string? UserId {get; set;}
 
     public Post? Post {get; set;}
 

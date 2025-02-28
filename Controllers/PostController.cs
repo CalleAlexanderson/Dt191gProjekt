@@ -81,6 +81,11 @@ namespace Backend.Controllers
         {
             // Hämtar en användare och lägger den i post.User
             var user = await _context.Users.FindAsync(post.UserId);
+            // validering om man inte går från frontend
+            if (user == null)
+            {
+                return BadRequest("Användaren hittas inte i databasen");
+            }
             post.User = user;
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();

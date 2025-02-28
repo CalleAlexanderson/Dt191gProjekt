@@ -10,5 +10,5 @@ public class Collection {
     public IdentityUser? User {get; set;}
 
     [Required(ErrorMessage = "Ange UserId på den användare som skapar denna samling")]
-    public int UserId {get; set;}
+    public string? UserId {get; set;}
 }
