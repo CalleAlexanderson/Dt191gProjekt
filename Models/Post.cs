@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Models;
 
@@ -14,8 +15,8 @@ public class Post {
 
     public DateOnly Date {get; set;} = DateOnly.FromDateTime(DateTime.Now);
 
-    public BackendUser? User {get; set;}
+    public IdentityUser? User {get; set;}
 
     [Required(ErrorMessage = "Ange UserId på den användare som skapar blogginlägget")]
-    public int UserId1 {get; set;}
+    public string? UserId {get; set;}
 }
