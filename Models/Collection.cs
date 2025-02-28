@@ -5,7 +5,11 @@ namespace Backend.Models;
 
 public class Collection {
     public int Id {get; set;}
-    public Post[]? Posts {get; set;}
+
+    [Required(ErrorMessage = "Ange samlingens titel")]
+    public string? Title {get; set;}
+
+    public ICollection<Post>? Posts {get; set;}
 
     public IdentityUser? User {get; set;}
 

@@ -30,6 +30,10 @@ namespace Backend.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("varchar(95)");

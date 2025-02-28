@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20250228160827_InitiealCreate")]
+    [Migration("20250228180558_InitiealCreate")]
     partial class InitiealCreate
     {
         /// <inheritdoc />
@@ -32,6 +32,10 @@ namespace Backend.Migrations
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
