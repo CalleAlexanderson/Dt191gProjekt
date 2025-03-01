@@ -34,6 +34,8 @@ namespace Backend.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Collection>> GetCollection(int id)
         {
+            var users = await _context.Users.ToListAsync();
+            var posts = await _context.Posts.ToListAsync();
             var collection = await _context.Collections.FindAsync(id);
 
             if (collection == null)
@@ -54,6 +56,37 @@ namespace Backend.Controllers
                 return BadRequest();
             }
 
+            // Hämtar en användare och lägger den i post.User
+            var user = await _context.Users.FindAsync(collection.UserId);
+            // validering om man inte går från frontend
+            if (user == null)
+            {
+                return BadRequest("Användaren hittas inte i databasen");
+            }
+
+
+            var dbPosts = await _context.Posts.ToListAsync();
+
+            List<Post> posts = new List<Post>();
+            collection.User = user;
+
+            // uppdaterar PostId efter de poster som hittades i databsen
+            List<int> newPostId = new List<int>();
+            
+            for (int i = 0; i < dbPosts.Count; i++)
+            {
+                for (int index = 0; index < collection.PostsId?.Length; index++)
+                {
+                    if (collection.PostsId[index] == dbPosts[i].Id)
+                    {
+                        posts.Add(dbPosts[i]);
+                        newPostId.Add(dbPosts[i].Id);
+                    }
+                }
+            }
+            
+            collection.Posts = posts;
+            collection.PostsId = newPostId.ToArray();
             _context.Entry(collection).State = EntityState.Modified;
 
             try
@@ -88,9 +121,21 @@ namespace Backend.Controllers
                 return BadRequest("Användaren hittas inte i databasen");
             }
 
+
+            var dbPosts = await _context.Posts.ToListAsync();
+            List<Post> posts = new List<Post>();
             collection.User = user;
 
-            var posts = await _context.Posts.ToListAsync();
+            for (int i = 0; i < dbPosts.Count; i++)
+            {
+                for (int index = 0; index < collection.PostsId?.Length; index++)
+                {
+                    if (collection.PostsId[index] == dbPosts[i].Id)
+                    {
+                        posts.Add(dbPosts[i]);
+                    }
+                }
+            }
 
             collection.Posts = posts;
             _context.Collections.Add(collection);

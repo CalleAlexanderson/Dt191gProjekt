@@ -11,6 +11,8 @@ public class Collection {
 
     public ICollection<Post>? Posts {get; set;}
 
+    public int[]? PostsId {get; set;}
+
     public IdentityUser? User {get; set;}
 
     [Required(ErrorMessage = "Ange UserId på den användare som skapar denna samling")]
