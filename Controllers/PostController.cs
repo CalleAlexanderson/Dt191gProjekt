@@ -26,6 +26,7 @@ namespace Backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
         {
+            var users = await _context.Users.ToListAsync();
             return await _context.Posts.ToListAsync();
         }
 
@@ -33,6 +34,7 @@ namespace Backend.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Post>> GetPost(int id)
         {
+            var users = await _context.Users.ToListAsync();
             var post = await _context.Posts.FindAsync(id);
 
             if (post == null)
