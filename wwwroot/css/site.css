@@ -2,6 +2,18 @@ html {
   font-size: 14px;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -21,11 +33,29 @@ body {
   margin-bottom: 60px;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* scoped css funkar inte på dessa  */
+.title-div input{
+  background-color: aquamarine;
+  font-size: 30px;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.desc-div textarea{
+  resize: none;
+  min-height: 50px;
+  height: auto;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.desc-div textarea:focus,
+.content-div textarea:focus{
+  background-color: rgb(235, 255, 255);
+  outline: none;
+}
+
+.content-div textarea {
+  resize: none;
+  min-height: 400px;
+  height: auto;
+  border: none;
 }

@@ -73,7 +73,6 @@ namespace Backend.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("varchar(95)");
 
                     b.HasKey("Id");
@@ -328,9 +327,7 @@ namespace Backend.Migrations
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

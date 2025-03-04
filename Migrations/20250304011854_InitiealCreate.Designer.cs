@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20250301010001_InitiealCreate")]
+    [Migration("20250304011854_InitiealCreate")]
     partial class InitiealCreate
     {
         /// <inheritdoc />
@@ -76,7 +76,6 @@ namespace Backend.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("varchar(95)");
 
                     b.HasKey("Id");
@@ -331,9 +330,7 @@ namespace Backend.Migrations
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

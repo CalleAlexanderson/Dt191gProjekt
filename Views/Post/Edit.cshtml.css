@@ -1,0 +1,19 @@
+.title-div {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.desc-div,
+.content-div {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-div {
+}

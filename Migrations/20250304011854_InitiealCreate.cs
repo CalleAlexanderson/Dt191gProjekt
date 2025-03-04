@@ -234,7 +234,7 @@ namespace Backend.Migrations
                     Content = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Date = table.Column<DateOnly>(type: "date", nullable: false),
-                    UserId = table.Column<string>(type: "varchar(95)", nullable: false)
+                    UserId = table.Column<string>(type: "varchar(95)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CollectionId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -245,8 +245,7 @@ namespace Backend.Migrations
                         name: "FK_Posts_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Posts_Collections_CollectionId",
                         column: x => x.CollectionId,
