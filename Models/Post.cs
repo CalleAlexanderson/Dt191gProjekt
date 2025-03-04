@@ -7,8 +7,10 @@ public class Post {
     public int Id {get; set;}
 
     [Required(ErrorMessage = "Ange blogginläggets titel")]
+    [MaxLength(30)]
     public string? Title {get; set;}
 
+    [MaxLength(200)]
     public string? Description {get; set;}
 
     public string? Content {get; set;}

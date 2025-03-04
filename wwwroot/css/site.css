@@ -2,6 +2,10 @@ html {
   font-size: 14px;
 }
 
+a {
+  text-decoration: none;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -13,15 +17,102 @@ html {
   border: 0;
 }
 
+/* account pages common css */
+
+.account-page-main-div {
+  width: 95%;
+  max-width: 500px;
+  margin: 40px auto;
+}
+
+.account-page-main-div h2{
+  text-align: center;
+}
+
+.account-first-div {
+  background-color: #D9D9D9;
+}
+
+.account-second-div  {
+  background-color: #A72121;
+  color: white;
+}
+
+.account-first-div form,
+.account-second-div div {
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.account-inputs{
+  display: block;
+  width: 80%;
+  margin: 20px auto 5px;
+  padding: 4px;
+  border: none;
+  font-size: 20px;
+  color: black;
+}
+
+.account-submit-btn{
+  display: block;
+  width: 134px;
+  height: 36px;
+  margin: 30px auto;
+  padding: 3px;
+  border: none;
+  border-radius: 10px;
+  background-color: #A72121;
+  color: white;
+  font-size: 20px;
+  transition: 0.25s background;
+  cursor: pointer;
+}
+
+.account-submit-btn:hover,
+.account-a-btn:hover {
+  background-color: #6B0000;
+}
+
+.account-a-btn {
+  display: block;
+  width: 134px;
+  height: 36px;
+  margin: 30px auto;
+  border: 3px solid white;
+  border-radius: 10px;
+  background-color: #A72121;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.25s background;
+}
+
 
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
+
+  .account-page-main-div {
+    width: 600px;
+    max-width: none;
+  }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+@media (min-width: 1024px) {
+  .account-page-main-div {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  .account-first-div,
+  .account-second-div {
+    height: 400px;
+  }
 }
 
 html {
@@ -34,28 +125,44 @@ body {
 }
 
 /* scoped css funkar inte på dessa  */
-.title-div input{
-  background-color: aquamarine;
-  font-size: 30px;
+
+#error-alert ul {
+  list-style: none;
+  padding: 0;
+
 }
 
-.desc-div textarea{
+/* Post admin gränssnitt */
+.title-div textarea {
+  font-size: 24px;
+  padding: 2px;
+  border: none;
+  border-bottom: 2px solid black;
+  text-align: center;
+}
+
+.desc-div textarea {
   resize: none;
-  min-height: 50px;
+  min-height: 100px;
   height: auto;
+  padding: 4px;
   border: none;
   border-bottom: 1px solid black;
-}
-
-.desc-div textarea:focus,
-.content-div textarea:focus{
-  background-color: rgb(235, 255, 255);
-  outline: none;
 }
 
 .content-div textarea {
   resize: none;
   min-height: 400px;
   height: auto;
+  padding: 4px;
   border: none;
 }
+
+.title-div textarea:focus,
+.desc-div textarea:focus,
+.content-div textarea:focus {
+  background-color: rgb(235, 255, 255);
+  outline: none;
+}
+
+.submit-div input {}

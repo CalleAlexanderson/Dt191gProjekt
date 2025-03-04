@@ -1,18 +1,32 @@
 .title-div {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 70%;
     max-width: 500px;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
-.desc-div,
+.desc-div {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 650px;
+    margin: 10px auto;
+}
+
+
 .content-div {
     display: flex;
     flex-direction: column;
     width: 90%;
     max-width: 800px;
     margin: 0 auto;
+}
+
+.submit-div {
+  position: fixed;
+  top: 50px;
+  right: 100px;
 }
 
 .form-div {

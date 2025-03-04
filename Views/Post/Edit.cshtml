@@ -1,26 +1,23 @@
 @model Backend.Models.Post
 
 @{
-    ViewData["Title"] = "Edit";
+
 }
 
-<h1>Edit</h1>
 
-<h4>Post</h4>
-<hr />
-<div >
+
     <div class="form-div">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" ></div>
             <input type="hidden" asp-for="Id" />
             <div class="title-div">
                 <label asp-for="Title" class="visually-hidden" ></label>
-                <input asp-for="Title" />
+                @Html.TextArea("Title", new { @class = "desc-input", placeholder ="The perfect Title!" })
                 <span asp-validation-for="Title" ></span>
             </div>
             <div class="desc-div">
                 <label asp-for="Description" class="visually-hidden" ></label>
-                @Html.TextArea("Description", new { @class = "desc-input", placeholder ="Your posts perfect description!" })
+                @Html.TextArea("Description", new { @class = "desc-input", placeholder ="Your posts perfect description! (Max 200 characters)" })
                 <span asp-validation-for="Description" ></span>
             </div>
             <div class="content-div">
@@ -28,12 +25,12 @@
                 @Html.TextArea("Content", new { @class = "", placeholder ="Your posts content goes here!" })
                 <span asp-validation-for="Content" ></span>
             </div>
-            <div>
+            <div  class="submit-div">
                 <input type="submit" value="Save" />
             </div>
         </form>
     </div>
-</div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>
