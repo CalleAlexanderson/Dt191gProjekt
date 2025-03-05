@@ -11,6 +11,11 @@ a {
   text-decoration: none;
 }
 
+main{
+  max-width: 1000px;
+  margin: auto;
+}
+
 .logo {
   display: block;
   width: 200px;
@@ -35,7 +40,95 @@ a {
   border: 0;
 }
 
-/* account pages common css */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* scoped css funkar inte på dessa  */
+
+#error-alert ul {
+  list-style: none;
+  padding: 0;
+
+}
+
+#profile-dropdown a{
+  color: white;
+  transition: 0.25s color;
+}
+
+#profile-dropdown a:hover{
+  color: #A72121;
+}
+
+.profile-nav a {
+  display: block;
+  padding: 5px 10px 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: 14px;
+  color: black;
+  transition: 0.25s;
+}
+
+.profile-nav a:hover {
+  background-color: #6B0000;
+  color: white;
+}
+
+.profile-nav a.active {
+  background-color: #c24040;
+  color: white;
+}
+
+#status-msg-div {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+}
+
+.account-inputs {
+  display: block;
+  width: 80%;
+  margin: 20px auto 5px;
+  padding: 4px;
+  border: none;
+  font-size: 20px;
+  color: black;
+}
+
+.account-labels {
+  display: block;
+  width: 80%;
+  font-size: 20px;
+  color: white;
+  margin: 0 auto;
+}
+
+.data-div p{
+  color: white;
+  width: 50%;
+  margin: 10px auto;
+  font-size: 16px;
+}
+
+.account-main-div {
+  background-color: #c24040;
+  padding: 5px 0;
+}
+
+.account-main-div h1{
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+}
 
 .account-page-main-div {
   width: 95%;
@@ -43,7 +136,7 @@ a {
   margin: 40px auto;
 }
 
-.account-page-main-div h2{
+.account-page-main-div h2 {
   text-align: center;
 }
 
@@ -51,7 +144,7 @@ a {
   background-color: #D9D9D9;
 }
 
-.account-second-div  {
+.account-second-div {
   background-color: #A72121;
   color: white;
 }
@@ -64,17 +157,7 @@ a {
   text-align: center;
 }
 
-.account-inputs{
-  display: block;
-  width: 80%;
-  margin: 20px auto 5px;
-  padding: 4px;
-  border: none;
-  font-size: 20px;
-  color: black;
-}
-
-.account-submit-btn{
+.account-submit-btn {
   display: block;
   width: 134px;
   height: 36px;
@@ -110,60 +193,6 @@ a {
   transition: 0.25s background;
 }
 
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-
-  .account-page-main-div {
-    width: 600px;
-    max-width: none;
-  }
-
-  .logo-nav-div {
-    display: grid;
-    grid-template-columns: 200px auto;
-  }
-}
-
-@media (min-width: 1024px) {
-  .account-page-main-div {
-    display: grid;
-    grid-template-columns: 50% 50%;
-  }
-  .account-first-div,
-  .account-second-div {
-    height: 400px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
-
-/* scoped css funkar inte på dessa  */
-
-#error-alert ul {
-  list-style: none;
-  padding: 0;
-
-}
-
-#profile-dropdown a{
-  color: white;
-  transition: 0.25s color;
-}
-
-#profile-dropdown a:hover{
-  color: #A72121;
-}
-
 /* Post admin gränssnitt */
 .title-div textarea {
   font-size: 24px;
@@ -197,4 +226,37 @@ body {
   outline: none;
 }
 
-.submit-div input {}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  .account-page-main-div {
+    width: 600px;
+    max-width: none;
+  }
+
+  .logo-nav-div {
+    display: grid;
+    grid-template-columns: 200px auto;
+  }
+  
+  .profile-nav a {
+    font-size: 20px;
+  }
+
+  .data-div p{
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .account-page-main-div {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  .account-first-div,
+  .account-second-div {
+    height: 400px;
+  }
+}

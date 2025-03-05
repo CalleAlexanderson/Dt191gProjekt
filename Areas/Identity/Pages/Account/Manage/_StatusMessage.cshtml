@@ -1,0 +1,9 @@
+﻿@model string
+
+@if (!String.IsNullOrEmpty(Model))
+{
+    <div id="status-msg-div" role="alert">
+        @Model
+        <button type="button" id="account-save-btn" class="account-a-btn" aria-label="Close">Stäng</button>
+    </div>
+}
