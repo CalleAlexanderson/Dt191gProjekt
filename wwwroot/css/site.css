@@ -1,9 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   font-size: 14px;
 }
 
 a {
   text-decoration: none;
+}
+
+.logo {
+  display: block;
+  width: 200px;
+  height: 80px;
+}
+
+.logo img {
+  width: auto;
+  height: 75px;
+  margin-top: 5px;
+  margin-left: 5px;
 }
 
 .visually-hidden {
@@ -102,6 +120,11 @@ a {
     width: 600px;
     max-width: none;
   }
+
+  .logo-nav-div {
+    display: grid;
+    grid-template-columns: 200px auto;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -130,6 +153,15 @@ body {
   list-style: none;
   padding: 0;
 
+}
+
+#profile-dropdown a{
+  color: white;
+  transition: 0.25s color;
+}
+
+#profile-dropdown a:hover{
+  color: #A72121;
 }
 
 /* Post admin gränssnitt */

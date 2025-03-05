@@ -2,22 +2,24 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
+<div class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+    
+    <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><button class="login-btn" id="profile-btn"><img src="~/user.png" alt="user icon">Profile</button></a>
+    <div id="profile-dropdown" class="hidden">
+        <img src="" alt="">
+        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name</a>
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" >Logout</button>
         </form>
-    </li>
+    </div>
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
+    
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><button class="login-btn"><img src="~/user.png" alt="user icon">Login</button></a>
+    
 }
-</ul>
+</div>

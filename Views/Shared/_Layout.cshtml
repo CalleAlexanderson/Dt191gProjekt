@@ -8,19 +8,15 @@
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Backend.styles.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" asp-append-version="true">
 </head>
 
 <body>
     <header>
         <nav>
-            <div>
-                <a asp-area="" asp-controller="Home" asp-action="Index">Backend</a>
-                <button type="button" id="nav-toggle-btn"
-                    aria-label="Toggle navigation">
-                    <span class="nav-menu-span"></span>
-                    <span class="nav-menu-span"></span>
-                    <span class="nav-menu-span"></span>
-                </button>
+            <div class="logo-nav-div">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="logo"><img src="~/logo.png"
+                        asp-append-version="true"></a>
                 <div id="nav-div" class="hidden">
                     <partial name="_LoginPartial" />
                     <ul class="">
@@ -28,8 +24,7 @@
                             <a class="" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="">
-                            <a class="" asp-area="" asp-controller="Home"
-                                asp-action="Privacy">Privacy</a>
+                            <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li>
                             <a class="" asp-area="" asp-controller="Post" asp-action="index">Post</a>
@@ -38,6 +33,12 @@
                     </ul>
                 </div>
             </div>
+            <button type="button" id="nav-toggle-btn" aria-label="Toggle navigation">
+                <span class="nav-menu-span"></span>
+                <span class="nav-menu-span"></span>
+                <span class="nav-menu-span"></span>
+            </button>
+
         </nav>
     </header>
     <div class="container">
@@ -47,6 +48,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
+        <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
         <div class="container">
             &copy; 2025 - Backend - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
