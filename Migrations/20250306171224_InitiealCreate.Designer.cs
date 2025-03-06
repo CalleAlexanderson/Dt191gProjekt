@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20250304011854_InitiealCreate")]
+    [Migration("20250306171224_InitiealCreate")]
     partial class InitiealCreate
     {
         /// <inheritdoc />
@@ -69,11 +69,13 @@ namespace Backend.Migrations
                         .HasColumnType("date");
 
                     b.Property<string>("Description")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(95)");
