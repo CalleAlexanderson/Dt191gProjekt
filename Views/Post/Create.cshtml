@@ -10,7 +10,6 @@
             <a asp-action="Posts"><button class="return-button">← Tillbaka</button></a>
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" ></div>
-            <input type="hidden" asp-for="Id" />
             <div class="title-div">
                 <label asp-for="Title" class="visually-hidden" ></label>
                 @Html.TextArea("Title", new { @class = "desc-input", placeholder ="The perfect Title!" })
