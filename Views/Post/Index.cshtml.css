@@ -26,37 +26,6 @@
     background-color: #688ec0;
 }
 
-.discover-post {
-    width: 90%;
-    max-width: 420px;
-    margin: 5px auto;
-    background-color: white;
-}
-
-.discover-post-info {
-    display: grid;
-    grid-template-columns: 100px auto;
-    padding: 5px;
-}
-
-.discover-post-info > *{
-    margin: 5px 10px;
-}
-
-
-.discover-post-info h3{
-    color: black;
-}
-
-.discover-post-info h3:hover{
-    text-decoration: underline;
-}
-
-.discover-post-text {
-    padding: 5px;
-    line-height: 20px;
-}
-
 @media (min-width: 768px) {
     .discover-posts-div {
     }

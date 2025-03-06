@@ -1,5 +1,5 @@
 ﻿@{
-    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
     {
         Layout = parentLayout.ToString();
     }
@@ -11,8 +11,15 @@
 
 <div>
     <div>
-        <div class="col-md-3">
+        <div>
             <partial name="_ManageNav" />
+            <a asp-action="Posts" asp-controller="Post"><button class="my-posts-button">Min blogg</button></a>
+            <div class="publish-div">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                    asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="publish-button">Logout</button>
+                </form>
+            </div>
         </div>
         <div class="account-main-div">
             @RenderBody()

@@ -1,0 +1,58 @@
+.details-main-div{
+    width: 95%;
+    margin: 20px auto;
+    background-color: white;
+}
+
+.details-main-div h1{
+    font-size: 40px;
+}
+
+.details-info-div {
+    font-size: 18px;
+}
+
+.details-desc-div {
+    width: 50%;
+    margin: 10px auto;
+}
+
+.details-desc-div button{
+    display: block;
+    width: 120px;
+    height: 30px;
+    margin: 0 auto;
+    border: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #A72121;
+    color: white;
+    font-size: 20px;
+
+}
+
+.details-desc-div-btn-dormant {
+    border-radius: 10px;
+}
+
+.details-desc-div div{
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #A72121;
+    
+}
+
+.details-desc-div div > *{
+    padding: 5px;
+    background-color: white;
+    font-family: "Raleway", sans-serif;
+}
+
+.details-content-div {
+    font-size: 20px;
+    line-height: 32px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    font-family: "Raleway", sans-serif;
+}

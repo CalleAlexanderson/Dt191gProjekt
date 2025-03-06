@@ -40,6 +40,20 @@ main {
   border: 0;
 }
 
+.hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
+.field-validation-error{
+  width: max-content;
+  padding: 5px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: white;
+  font-size: 18px;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -233,7 +247,43 @@ body {
   text-decoration: underline;
 }
 
+.discover-post {
+    width: 90%;
+    max-width: 420px;
+    margin: 5px auto;
+    background-color: white;
+}
+
+.discover-post-info {
+    display: grid;
+    grid-template-columns: 100px auto;
+    padding: 5px;
+}
+
+
+.discover-post-info h3,
+.discover-post-info p{
+    color: black;
+}
+
+.discover-post-text {
+    padding: 5px;
+    line-height: 20px;
+}
+
+/* Post details */
+
+.details-img{
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  margin: 10px 0 30px;
+  object-fit: cover;
+}
+
 /* Post admin gränssnitt */
+
 .title-div textarea {
   resize: none;
   font-size: 24px;

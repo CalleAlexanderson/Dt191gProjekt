@@ -4,23 +4,28 @@
     ViewData["PageTitle"] = "Details";
 }
 
-<h1>@Html.DisplayFor(model => model.Title)</h1>
+<div class="details-main-div">
+    <h1>@Html.DisplayFor(model => model.Title)</h1>
 
-<div>
-     @Html.DisplayFor(model => model.Date)
-     
-    @Html.DisplayFor(model => model.User.UserName)
-</div>
+    <div class="details-info-div">
+        @Html.DisplayFor(model => model.Date),
 
-<div>
-    <div>
-        @Html.DisplayFor(model => model.Description)
+        @Html.DisplayFor(model => model.User.UserName)
     </div>
-    <div>
-        @Html.DisplayFor(model => model.Content)
+    <img src="~/logo.png" class="details-img">
+    <div class="details-desc-div">
+        <button id="details-show-desc-btn" class="details-desc-div-btn-dormant">Description</button>
+        <div id="details-desc-toggle-div" class="hidden">
+            <p>@Html.DisplayFor(model => model.Description)</p>
+        </div>
     </div>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+        
+        <div class="details-content-div">
+            <p>@Html.DisplayFor(model => model.Content)</p>
+        </div>
+    
     <a asp-action="Posts"><button class="return-button">← Tillbaka</button></a>
+</div>
+<div class="publish-div">
+    <a asp-action="Edit" asp-route-id="@Model?.Id"><button class="publish-button">Redigera</button></a> 
 </div>

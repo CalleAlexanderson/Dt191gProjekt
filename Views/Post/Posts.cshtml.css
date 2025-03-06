@@ -23,33 +23,24 @@ article:hover {
     transform: scale(1.1);
 }
 
-article:hover * {
-
-}
-
-.discover-post {
-    width: 90%;
-    max-width: 420px;
-    margin: 5px auto;
-    background-color: white;
-}
-
-.discover-post-info {
-    display: grid;
-    grid-template-columns: 100px auto;
+.create-button {
+    display: block;
+    width: 250px;
+    height: 50px;
+    margin: 30px auto 10px ;
     padding: 5px;
-}
-
-
-.discover-post-info h3,
-.discover-post-info p{
-    color: black;
-}
-
-.discover-post-text {
-    padding: 5px;
-    line-height: 20px;
-}
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #A72121;
+    color: white;
+    font-size: 28px;
+    transition: 0.25s background;
+    cursor: pointer;
+  }
+  
+  .create-button:hover {
+    background-color: #6B0000;
+  }
 
 @media (min-width: 768px) {
 }

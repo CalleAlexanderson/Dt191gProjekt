@@ -1,0 +1,16 @@
+h1 {
+    text-align: center;
+    margin: 50px auto 30px;
+}
+
+.discover-post {
+    border: 1px solid black;
+}
+
+.publish-button {
+    margin: 20px auto;
+}
+
+article:hover h3 {
+    text-decoration: underline;
+}

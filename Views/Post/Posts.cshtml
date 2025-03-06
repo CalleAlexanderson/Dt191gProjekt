@@ -21,16 +21,14 @@
 }
 
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+<a asp-action="Create"><button class="create-button" >Skapa blogginlägg</button></a>
 
 <h1 class="your-posts-heading">Dina inlägg</h1>
 
 <section class="your-posts-div">
     @for (var i = 0; i < yourPosts.Count; i++)
     {
-        var desc = yourPosts[i].Description;
         <a asp-action="Details" asp-route-id="@yourPosts[i].Id">
             <article class="discover-post">
                 <div class="discover-post-info">

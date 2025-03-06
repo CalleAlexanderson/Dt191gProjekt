@@ -17,28 +17,28 @@ function init() {
 
     dropDownBtn.addEventListener("mouseenter", () => {
         setTimeout(() => {
-            dropDown.classList.remove("hidden");
+            dropDown.classList.remove("nav-hidden");
         }, 250);
     })
     dropDownBtn.addEventListener("mouseleave", () => {
-        dropDown.classList.add("hidden");
+        dropDown.classList.add("nav-hidden");
     })
 
     dropDown.addEventListener("mouseenter", () => {
-        dropDown.classList.remove("hidden");
+        dropDown.classList.remove("nav-hidden");
     })
     dropDown.addEventListener("mouseleave", () => {
-        dropDown.classList.add("hidden");
+        dropDown.classList.add("nav-hidden");
     })
 
     navbtn.addEventListener("click", () => {
         count++;
         console.log("funkar");
         console.log(count);
-        if (navDiv.classList.contains("hidden")) {
-            navDiv.classList.remove("hidden")
+        if (navDiv.classList.contains("nav-hidden")) {
+            navDiv.classList.remove("nav-hidden")
         } else {
-            navDiv.classList.add("hidden")
+            navDiv.classList.add("nav-hidden")
         }
     })
 
