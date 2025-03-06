@@ -1,0 +1,77 @@
+.discover-posts-heading {
+    width: 300px;
+    height: 100px;
+    margin: 20px auto 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #688ec0;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    text-align: center;
+}
+
+.discover-posts-heading h1 {
+    font-size: 48px;
+}
+
+.discover-posts-heading p {
+    font-size: 20px;
+}
+
+.discover-posts-div {
+    width: 95%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 5px 0;
+    background-color: #688ec0;
+}
+
+.discover-post {
+    width: 90%;
+    max-width: 420px;
+    margin: 5px auto;
+    background-color: white;
+}
+
+.discover-post-info {
+    display: grid;
+    grid-template-columns: 100px auto;
+    padding: 5px;
+}
+
+.discover-post-info > *{
+    margin: 5px 10px;
+}
+
+
+.discover-post-info h3{
+    color: black;
+}
+
+.discover-post-info h3:hover{
+    text-decoration: underline;
+}
+
+.discover-post-text {
+    padding: 5px;
+    line-height: 20px;
+}
+
+@media (min-width: 768px) {
+    .discover-posts-div {
+    }
+}
+
+@media (min-width: 1024px) {
+    .discover-posts-div {
+        width: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        max-width: none;
+    }
+}
+
+@media (min-width: 1440px) {
+    .discover-posts-div {
+    }
+}

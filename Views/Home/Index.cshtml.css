@@ -1,0 +1,51 @@
+.index-main-div {
+    background-color: #688ec0;
+    padding: 0 0 20px;
+}
+
+.index-create-div {
+    background-color: #5eceb2;
+    padding: 0 0 20px;
+}
+
+.index-subscribe-div {
+    background-color: #936fd6;
+    padding: 0 0 20px;
+}
+
+.index-collection-div {
+    background-color: #ecb959;
+    padding: 0 0 20px;
+}
+
+.index-main-div h1,
+.index-main-div p{
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 1px black;
+}
+
+.index-main-btn {
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: #A72121;
+  color: white;
+  font-size: 24px;
+  transition: 0.25s background;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px black;
+}
+
+.index-main-btn:hover {
+  background-color: #6B0000;
+}
+
+#discover-btn{
+    margin-top: 30px;
+    font-size: 36px;
+}
+
+.index-main-div p {
+    font-size: 24px;
+}

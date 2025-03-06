@@ -1,0 +1,39 @@
+.create-posts-heading {
+    text-align: center;
+}
+
+.create-posts-heading h1 {
+    font-size: 48px;
+}
+
+.create-form{ 
+    background-color: #c24040;
+    margin: 20px auto;
+    padding: 10px 0 30px;
+    border-radius: 20px;
+}
+
+.title-div {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.desc-div {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 650px;
+    margin: 10px auto;
+}
+
+
+.content-div {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}

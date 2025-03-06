@@ -1,3 +1,19 @@
+.edit-posts-heading {
+    text-align: center;
+}
+
+.edit-posts-heading h1 {
+    font-size: 48px;
+}
+
+.edit-form{ 
+    width: 95%;
+    margin: 20px auto;
+    padding: 10px 0 30px;
+    border-radius: 20px;
+    background-color: #c24040;
+}
+
 .title-div {
     display: flex;
     flex-direction: column;
@@ -23,11 +39,28 @@
     margin: 0 auto;
 }
 
-.submit-div {
-  position: fixed;
-  top: 50px;
-  right: 100px;
+.delete-button{
+    display: block;
+    width: 150px;
+    height: 50px;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #A72121;
+    color: white;
+    font-size: 28px;
+    transition: 0.25s background;
+    cursor: pointer;
 }
 
-.form-div {
+.delete-button:hover {
+    background-color: #6B0000;
 }
+
+@media (min-width: 768px) {
+    .delete-button{
+        position: absolute;
+        right: 300px;
+        top: 15px;
+    }
+  }

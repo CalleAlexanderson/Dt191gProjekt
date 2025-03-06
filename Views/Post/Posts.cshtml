@@ -1,0 +1,48 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<Backend.Models.Post>
+
+@{
+    ViewData["PageTitle"] = "Dina inlägg";
+
+    Post[] arr = Model.ToArray();
+    List<Post> yourPosts = [];
+    var user = User.Identity.Name;
+    @* Lägger till de inlägg som användaren skrivit  *@
+    for (var i = 0; i < arr.Length; i++)
+    {
+        if (arr[i].User.UserName == user)
+        {
+
+            yourPosts.Add(arr[i]);
+        }
+    }
+}
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<h1 class="your-posts-heading">Dina inlägg</h1>
+
+<section class="your-posts-div">
+    @for (var i = 0; i < yourPosts.Count; i++)
+    {
+        var desc = yourPosts[i].Description;
+        <a asp-action="Details" asp-route-id="@yourPosts[i].Id">
+            <article class="discover-post">
+                <div class="discover-post-info">
+                    <img src="~/logo.png" alt="" class="discover-post-img">
+                    <div>
+                        <h3>@Html.DisplayFor(modelItem => yourPosts[i].Title)</h3>
+
+                        <p>@Html.DisplayFor(modelItem => yourPosts[i].Date)</p>
+                    </div>
+                </div>
+            </article>
+        </a>
+
+    }
+</section>

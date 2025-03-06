@@ -28,6 +28,13 @@ namespace Backend.Controllers
             return View(await blogDbContext.ToListAsync());
         }
 
+        // GET: Post/Posts
+        public async Task<IActionResult> Posts()
+        {
+            var blogDbContext = _context.Posts.Include(p => p.User);
+            return View(await blogDbContext.ToListAsync());
+        }
+
         // GET: Post/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -124,7 +131,7 @@ namespace Backend.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Posts));
             }
             return View(post);
         }
@@ -160,7 +167,7 @@ namespace Backend.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Posts));
         }
 
         private bool PostExists(int id)

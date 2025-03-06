@@ -1,8 +1,36 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["PageTitle"] = "Index";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="index-main-div">
+    <h1>Share your passions the easy way!</h1>
+    <p>Create your own blog today</p>
+    @if (SignInManager.IsSignedIn(User))
+{
+    <a class="index-main-a-btn" asp-area="" asp-controller="Post" asp-action="Create"><button class="index-main-btn">Skapa blogginlägg</button></a>
+}
+else
+{
+    
+        <a class="index-main-a-btn" asp-area="Identity" asp-page="/Account/Login"><button class="index-main-btn">Login</button></a>
+    
+}
+<a class="index-main-a-btn" asp-controller="Post" asp-action="Index"><button class="index-main-btn" id="discover-btn">Utforska</button></a>
+</section>
+<section class="index-create-div">
+    <h2>Skapa blogginlägg</h2>
+<a class="index-main-a-btn" asp-controller="Post" asp-action="Create"><button class="index-main-btn" id="discover-btn">Skapa</button></a>
+</section>
+<section  class="index-subscribe-div">
+    <h2>Få folk att prenumerera på dina inlägg</h2>
+<a class="index-main-a-btn" asp-controller="Subscribe" asp-action="Index"><button class="index-main-btn" id="discover-btn">Prenumerationer</button></a>
+</section>
+<section  class="index-collection-div">
+    <h2>Spara dina och andras inlägg i samlingar</h2>
+<a class="index-main-a-btn" asp-controller="Collection" asp-action="Index"><button class="index-main-btn" id="discover-btn">Samlingar</button></a>
+</section>
+

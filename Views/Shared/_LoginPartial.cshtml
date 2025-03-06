@@ -6,7 +6,7 @@
 @if (SignInManager.IsSignedIn(User))
 {
     
-    <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><button class="login-btn" id="profile-btn"><img src="~/user.png" alt="user icon">Profile</button></a>
+    <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><button class="login-btn profile-btn" id="profile-button"><img src="~/user.png" alt="user icon">Profile</button></a>
     <div id="profile-dropdown" class="hidden">
         <img src="" alt="">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name</a>
@@ -19,7 +19,7 @@
 else
 {
     
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><button class="login-btn"><img src="~/user.png" alt="user icon">Login</button></a>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><button class="login-btn profile-btn"><img src="~/user.png" alt="user icon">Login</button></a>
     
 }
 </div>

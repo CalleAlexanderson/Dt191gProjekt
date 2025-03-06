@@ -1,12 +1,13 @@
 @model Backend.Models.Post
 
 @{
-
+    ViewData["PageTitle"] = "Redigera";
 }
 
 
-
-    <div class="form-div">
+    <h1 class="edit-posts-heading">Redigera</h1>
+    <div class="edit-form">
+    <a asp-action="Posts"><button class="return-button">← Tillbaka</button></a>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" ></div>
             <input type="hidden" asp-for="Id" />
@@ -25,15 +26,15 @@
                 @Html.TextArea("Content", new { @class = "", placeholder ="Your posts content goes here!" })
                 <span asp-validation-for="Content" ></span>
             </div>
-            <div  class="submit-div">
-                <input type="submit" value="Save" />
+            <div  class="publish-div">
+                <input type="submit" class="publish-button" value="Spara" />
             </div>
         </form>
     </div>
 
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id"><button class="delete-button">Radera</button></a>
 </div>
 
 @section Scripts {

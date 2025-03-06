@@ -10,7 +10,7 @@ function init() {
     let count = 0;
     let navbtn = document.getElementById('nav-toggle-btn');
     let navDiv = document.getElementById('nav-div');
-    let dropDownBtn = document.getElementById('profile-btn');
+    let dropDownBtn = document.getElementById('profile-button');
     let dropDown = document.getElementById('profile-dropdown');
     console.log(dropDown);
     console.log(navDiv);

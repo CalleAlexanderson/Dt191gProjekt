@@ -11,7 +11,7 @@ a {
   text-decoration: none;
 }
 
-main{
+main {
   max-width: 1000px;
   margin: auto;
 }
@@ -51,18 +51,18 @@ body {
 
 /* scoped css funkar inte på dessa  */
 
-#error-alert ul {
+.error-alert ul {
   list-style: none;
   padding: 0;
-
+  margin-top: 10px;
 }
 
-#profile-dropdown a{
+#profile-dropdown a {
   color: white;
   transition: 0.25s color;
 }
 
-#profile-dropdown a:hover{
+#profile-dropdown a:hover {
   color: #A72121;
 }
 
@@ -112,7 +112,7 @@ body {
   margin: 0 auto;
 }
 
-.data-div p{
+.data-div p {
   color: white;
   width: 50%;
   margin: 10px auto;
@@ -124,7 +124,7 @@ body {
   padding: 5px 0;
 }
 
-.account-main-div h1{
+.account-main-div h1 {
   text-align: center;
   color: white;
   text-shadow: 1px 1px 1px black;
@@ -193,13 +193,55 @@ body {
   transition: 0.25s background;
 }
 
+.login-btn {
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: #A72121;
+  color: white;
+  font-size: 24px;
+  transition: 0.25s background;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #6B0000;
+}
+
+/* Home/index */
+
+.index-main-a-btn {
+  display: block;
+  width: max-content;
+  margin: 5px auto;
+}
+
+/* Post main gränssnit (discover) */
+
+.discover-post-img {
+  display: block;
+  width: 95%;
+  margin: 5px auto;
+  object-fit: cover;
+}
+
+.discover-post-readmore {
+  color: black;
+}
+
+.discover-post-readmore:hover {
+  text-decoration: underline;
+}
+
 /* Post admin gränssnitt */
 .title-div textarea {
+  resize: none;
   font-size: 24px;
   padding: 2px;
   border: none;
   border-bottom: 2px solid black;
   text-align: center;
+  transition: 0.25s border-radius;
 }
 
 .desc-div textarea {
@@ -209,6 +251,7 @@ body {
   padding: 4px;
   border: none;
   border-bottom: 1px solid black;
+  transition: 0.25s border-radius;
 }
 
 .content-div textarea {
@@ -217,13 +260,50 @@ body {
   height: auto;
   padding: 4px;
   border: none;
+  transition: 0.25s border-radius;
 }
 
 .title-div textarea:focus,
 .desc-div textarea:focus,
 .content-div textarea:focus {
-  background-color: rgb(235, 255, 255);
-  outline: none;
+  outline: 5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  background-color: #fafafa;
+}
+
+.publish-button {
+  display: block;
+  width: 150px;
+  height: 50px;
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #A72121;
+  color: white;
+  font-size: 28px;
+  transition: 0.25s background;
+  cursor: pointer;
+}
+
+.publish-button:hover {
+  background-color: #6B0000;
+}
+
+.return-button {
+  display: block;
+  height: 50px;
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #A72121;
+  color: white;
+  font-size: 28px;
+  transition: 0.25s background;
+  cursor: pointer;
+}
+
+.return-button:hover {
+  background-color: #6B0000;
 }
 
 @media (min-width: 768px) {
@@ -240,21 +320,35 @@ body {
     display: grid;
     grid-template-columns: 200px auto;
   }
-  
+
   .profile-nav a {
     font-size: 20px;
   }
 
-  .data-div p{
+  .data-div p {
     font-size: 20px;
+  }
+
+  .publish-div {
+    position: absolute;
+    top: 15px;
+    right: 120px;
+  }
+  
+  .return-button {
+    position: absolute;
+    top: 15px;
+    left: 250px;
   }
 }
 
 @media (min-width: 1024px) {
+
   .account-page-main-div {
     display: grid;
     grid-template-columns: 50% 50%;
   }
+
   .account-first-div,
   .account-second-div {
     height: 400px;
