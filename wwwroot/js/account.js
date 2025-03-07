@@ -2,11 +2,15 @@
 
 // --------------------------------------------------
 // Initiera globala variabler och händelsehanterare
-function init() {
+function accountInit() {
     let accSaveBtn = document.getElementById('account-save-btn');
-    accSaveBtn.addEventListener("click", ()=>{
-        document.getElementById('status-msg-div').style.display = "none";
-    })
+    
+    if (accSaveBtn != null) {
+        accSaveBtn.addEventListener("click", ()=>{
+            document.getElementById('status-msg-div').style.display = "none";
+        })
+    }
+
 } // Slut init
-window.addEventListener('load', init);
+window.addEventListener('load', accountInit);
 // --------------------------------------------------

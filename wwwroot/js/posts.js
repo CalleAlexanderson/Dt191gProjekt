@@ -3,17 +3,19 @@ let detailsDescDiv;
 let detailsShowDescBtn
 // --------------------------------------------------
 // Initiera globala variabler och händelsehanterare
-function init() {
+function postsInit() {
     detailsShowDescBtn = document.getElementById('details-show-desc-btn');
     detailsDescDiv = document.getElementById('details-desc-toggle-div');
-    console.log(detailsShowDescBtn);
-    detailsShowDescBtn.addEventListener("click", toggleDetailsDesc)
+
+    if (detailsShowDescBtn != null) {
+        detailsShowDescBtn.addEventListener("click", toggleDetailsDesc)
+    }
+
 } // Slut init
-window.addEventListener('load', init);
+window.addEventListener('load', postsInit);
 // --------------------------------------------------
 
 function toggleDetailsDesc() {
-    console.log("funkar");
     if (detailsDescDiv.classList.contains("hidden")) {
         detailsShowDescBtn.classList.remove("details-desc-div-btn-dormant");
         detailsDescDiv.classList.remove("hidden");
