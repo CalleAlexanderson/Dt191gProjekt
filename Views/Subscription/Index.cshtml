@@ -28,21 +28,19 @@
 <section class="your-posts-div">
     @for (var i = 0; i < subscriptions.Count; i++)
     {
-        <article class="discover-post">
-            <div class="discover-post-info">
-                <img src="~/logo.png" alt="" class="discover-post-img">
-                <div>
-                    <h3>@Html.DisplayFor(modelItem => posts[i].Title)</h3>
+        <a asp-controller="Post" asp-action="Details" asp-route-id="@posts[i].Id">
+            <article class="discover-post">
+                <div class="discover-post-info">
+                    <img src="~/logo.png" alt="" class="discover-post-img">
+                    <div>
+                        <h3>@Html.DisplayFor(modelItem => posts[i].Title)</h3>
 
-                    <p>@Html.DisplayFor(modelItem => posts[i].Date), @Html.DisplayFor(modelItem => posts[i].User.UserName)
+                        <p>@Html.DisplayFor(modelItem => posts[i].Date), @Html.DisplayFor(modelItem =>
+                            posts[i].User.UserName)
                     </p>
                 </div>
             </div>
-            @{int Id = @subscriptions[i].Id; }
-            <form asp-action="Delete">
-                <input type="hidden" asp-for="@Id" />
-                <input type="submit" value="Delete" class="" />
-            </form>
         </article>
-    }
+    </a>
+        }
 </section>

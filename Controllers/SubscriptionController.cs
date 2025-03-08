@@ -34,15 +34,14 @@ namespace Backend.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            Console.WriteLine("funkar: " +id);
-            var subscription = await _context.Subscriptions.FindAsync(id);
+            var subscription = await _context.Subscriptions.Where(x => x.PostId == id).ToListAsync();
             if (subscription != null)
             {
-                _context.Subscriptions.Remove(subscription);
+                _context.Subscriptions.Remove(subscription[0]);
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "Post", new { Id = id });
         }
 
         // POST: Subscription/Create
@@ -52,46 +51,26 @@ namespace Backend.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UserId,PostId")] Subscription subscription)
         {
+            // hämtar post och user
             IdentityUser? user = await _userManager.GetUserAsync(HttpContext.User);
             subscription.UserId = user?.Id;
             subscription.User = await _context.Users.FindAsync(subscription.UserId);
             subscription.Post = await _context.Posts.FindAsync(subscription.PostId);
 
+            // kollar om posten redan är prenumererad på
             var subscription1 = await _context.Subscriptions.Where(x => x.PostId == subscription.PostId).ToListAsync();
-            Console.WriteLine("sub: "+subscription1);
-            if (subscription1 != null)
+            if (subscription1.Count != 0)
             {  
-                ViewData["subError"] = "Detta inlägg prenumereras redan på";
-                // FIXA SÅ DEN HÄR JÄVLA REDIRECT GÅR RÄTT
-                return RedirectToAction("Details/3", "Post");
+                // skickar användaren tillbaka till posten de var på
+                return RedirectToAction("Details", "Post", new { Id = subscription.PostId });
             }
             
             if (ModelState.IsValid)
             {
                 _context.Add(subscription);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Posts", "Post");
+                return RedirectToAction("Details", "Post", new { Id = subscription.PostId });
             }
-            return View(subscription);
-        }
-
-        // GET: Subscription/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var subscription = await _context.Subscriptions
-                .Include(s => s.Post)
-                .Include(s => s.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (subscription == null)
-            {
-                return NotFound();
-            }
-
             return View(subscription);
         }
     }

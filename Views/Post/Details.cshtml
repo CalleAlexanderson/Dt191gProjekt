@@ -2,6 +2,9 @@
 
 @{
     ViewData["PageTitle"] = "Details";
+    var subscribe = ViewData["sub"];
+    var Id = ViewData["subId"];
+    var owns = ViewData["own"];
     var postId = Model.Id;
 }
 
@@ -24,19 +27,30 @@
     <div class="details-content-div">
         <p>@Html.DisplayFor(model => model.Content)</p>
     </div>
-
-    <a asp-action="Posts"><button class="return-button">← Tillbaka</button></a>
+    @ViewData["own"]
+    @if (owns == "true")
+    {
+        <a asp-action="Posts"><button class="return-button">← Tillbaka</button></a>
+        <div class="publish-div">
+            <a asp-action="Edit" asp-route-id="@Model?.Id"><button class="publish-button">Redigera</button></a>
+        </div>
+    }
 </div>
-<div class="publish-div">
-    <a asp-action="Edit" asp-route-id="@Model?.Id"><button class="publish-button">Redigera</button></a>
-</div>
 
-@* lägg till en subscription på inlägget *@
-@ViewData["subError"]
-<form asp-controller="Subscription" asp-action="Create">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="@postId" />
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
-</form>
+@if (subscribe == "true")
+{
+    <form asp-controller="Subscription" asp-action="Delete">
+        <input type="hidden" asp-for="@Id" />
+        <input type="submit" value="Delete" class="" />
+    </form>
+}
+else
+{
+    <form asp-controller="Subscription" asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="@postId" />
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+}

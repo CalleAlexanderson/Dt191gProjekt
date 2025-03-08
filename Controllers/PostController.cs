@@ -43,12 +43,32 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
+            // kollar om posten finns
             var post = await _context.Posts
                 .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (post == null)
             {
                 return NotFound();
+            }
+
+            // kollar om posten skapades av den inloggade användaren
+            IdentityUser? user = await _userManager.GetUserAsync(HttpContext.User);
+            if (post.User == user)
+            {
+                ViewData["own"] = "true";
+            } else {
+                ViewData["own"] = "false";
+            }
+
+            // skickar med om post är prenumererad på
+            var subscription = await _context.Subscriptions.Where(x => x.PostId == post.Id).ToListAsync();
+            if (subscription.Count != 0)
+            {
+                ViewData["subId"] = subscription[0].Id;
+                ViewData["sub"] = "true";
+            } else {
+                ViewData["sub"] = "false";
             }
 
             return View(post);
@@ -67,6 +87,7 @@ namespace Backend.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Description,Content")] Post post)
         {   
+            // Hämtar user och lägger till på posten
             IdentityUser? user = await _userManager.GetUserAsync(HttpContext.User);
             post.UserId = user?.Id;
             post.User = await _context.Users.FindAsync(post.UserId);
@@ -77,7 +98,6 @@ namespace Backend.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Posts));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", post.UserId);
             return View(post);
         }
 
@@ -89,6 +109,7 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
+            // kollar om posten finns
             var post = await _context.Posts.FindAsync(id);
             if (post == null)
             {
@@ -109,6 +130,7 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
+            // hämtar user (samma som create)
             IdentityUser? user = await _userManager.GetUserAsync(HttpContext.User);
             post.UserId = user?.Id;
             post.User = await _context.Users.FindAsync(post.UserId);
