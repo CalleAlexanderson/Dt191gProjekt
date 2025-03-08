@@ -11,7 +11,8 @@
     <link rel="icon" type="image/x-icon" href="~/favicon.ico" asp-append-version="true">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -22,18 +23,34 @@
                         asp-append-version="true"></a>
                 <div id="nav-div" class="nav-hidden">
                     <partial name="_LoginPartial" />
-                    <ul class="">
-                        <li class="">
-                            <a class="" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="">
-                            <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                    <ul class="nav-ul">
                         <li>
-                            <a class="" asp-area="" asp-controller="Post" asp-action="index">Post</a>
-
+                            <a class="nav-link" tabindex="-1" asp-area="" asp-controller="Post"
+                                asp-action="index"><button class="nav-discover-button">Utforska</button></a>
                         </li>
                     </ul>
+                    <div class="mobile-nav-only">
+                        <ul>
+                            <li>
+                                <a class="nav-link" tabindex="-1" asp-area="" asp-controller="Post"
+                                    asp-action="Posts"><button class="nav-discover-button">Min blogg</button></a>
+                            </li>
+                            <li>
+                                <a class="nav-link" tabindex="-1" asp-area="" asp-controller="Subscribe"
+                                    asp-action="index"><button class="nav-discover-button">Prenumerationer</button></a>
+                            </li>
+                            <li>
+                                <a class="nav-link" tabindex="-1" asp-area="" asp-controller="Collection"
+                                    asp-action="index"><button class="nav-discover-button">Samlingar</button></a>
+                            </li>
+                            <li>
+                                <form asp-area="Identity" asp-page="/Account/Logout"
+                                    asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button type="submit" class="nav-discover-button">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <button type="button" id="nav-toggle-btn" aria-label="Toggle navigation">
@@ -51,9 +68,10 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
+        <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik -
+            Flaticon</a>
         <div class="container">
-            &copy; 2025 - Backend - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - Blogify
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

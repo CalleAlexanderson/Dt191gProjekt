@@ -4,6 +4,8 @@
 }
 
 html {
+  max-width: 1600px;
+  margin: 0 auto;
   font-size: 14px;
 }
 
@@ -207,21 +209,6 @@ body {
   transition: 0.25s background;
 }
 
-.login-btn {
-  padding: 5px;
-  border: none;
-  border-radius: 10px;
-  background-color: #A72121;
-  color: white;
-  font-size: 24px;
-  transition: 0.25s background;
-  cursor: pointer;
-}
-
-.login-btn:hover {
-  background-color: #6B0000;
-}
-
 /* Home/index */
 
 .index-main-a-btn {
@@ -335,11 +322,15 @@ body {
   cursor: pointer;
 }
 
-.publish-button:hover {
+.publish-button:hover,
+.publish-button:focus {
   background-color: #6B0000;
 }
 
 .return-button {
+  position: absolute;
+  top: 90px;
+  left: 5px;
   display: block;
   height: 50px;
   padding: 5px;
@@ -352,7 +343,8 @@ body {
   cursor: pointer;
 }
 
-.return-button:hover {
+.return-button:hover,
+.return-button:focus {
   background-color: #6B0000;
 }
 
@@ -382,13 +374,12 @@ body {
   .publish-div {
     position: absolute;
     top: 15px;
-    right: 120px;
+    left: 375px;
   }
   
   .return-button {
-    position: absolute;
     top: 15px;
-    left: 250px;
+    left: 210px;
   }
 }
 

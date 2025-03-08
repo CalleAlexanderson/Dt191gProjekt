@@ -31,11 +31,47 @@
     display: none;
 }
 
-.profile-btn { 
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  display: block;
-  width: 80px;
-  height: 70px;
+.profile-btn {
+    display: block;
+    width: 90%;
+    height: 50px;
+    margin: 10px auto;
+    padding: 5px;
+    border: none;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #A72121;
+    color: white;
+    font-size: 24px;
+    transition: 0.25s background;
+    cursor: pointer;
+}
+
+.profile-btn:hover,
+.profile-btn:focus {
+    background-color: #6B0000;
+}
+
+span {
+    margin: 0 0 0 15px;
+    font-size: 32px;
+}
+
+@media (min-width: 768px) {
+    .profile-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 80px;
+        height: 75px;
+        margin: 0;
+        border: none;
+    }
+
+    span {
+        display: block;
+        margin: 0;
+        padding-bottom: 5px;
+        font-size: 24px;
+    }
 }

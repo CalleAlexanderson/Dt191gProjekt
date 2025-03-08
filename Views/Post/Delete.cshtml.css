@@ -3,6 +3,10 @@ h1 {
     margin: 50px auto 30px;
 }
 
+.delete-h1 {
+    margin-top: 70px;
+}
+
 .discover-post {
     border: 1px solid black;
 }

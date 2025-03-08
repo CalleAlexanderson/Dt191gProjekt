@@ -8,7 +8,7 @@
 
 .create-form{ 
     background-color: #c24040;
-    margin: 20px auto;
+    margin: 80px auto;
     padding: 10px 0 30px;
     border-radius: 20px;
 }
@@ -37,3 +37,31 @@
     max-width: 800px;
     margin: 0 auto;
 }
+
+.return-button {
+  top: 130px;
+  left: 5px;
+}
+
+.publish-button {
+    position: absolute;
+    top: 130px;
+    right: 5px;
+}
+
+@media (min-width: 768px) {
+    .create-form{ 
+        margin: 20px auto;
+    }
+
+    .return-button {
+        top: 15px;
+        left: 210px;
+      }
+      
+      .publish-button {
+          top: 0px;
+          left: 0;
+          right: 0;
+      }
+  }

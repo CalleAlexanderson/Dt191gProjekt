@@ -4,10 +4,9 @@
     ViewData["PageTitle"] = "Skapa blogginlägg";
 }
 
+<a asp-action="Posts"><button class="return-button">← Tillbaka</button></a>
 <h1 class="create-posts-heading">Skapa blogginlägg</h1>
-
     <div class="create-form">
-            <a asp-action="Posts"><button class="return-button">← Tillbaka</button></a>
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" ></div>
             <div class="title-div">

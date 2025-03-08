@@ -12,14 +12,15 @@
     cursor: pointer;
 }
 
-.my-posts-button:hover {
+.my-posts-button:hover,
+.my-posts-button:focus {
     background-color: #6B0000;
 }
 
 @media (min-width: 768px) {
     .my-posts-button{
         position: absolute;
-        right: 300px;
+        right: 240px;
         top: 15px;
     }
   }

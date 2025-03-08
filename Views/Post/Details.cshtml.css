@@ -1,10 +1,10 @@
-.details-main-div{
+.details-main-div {
     width: 95%;
-    margin: 20px auto;
+    margin: 60px auto 50px;
     background-color: white;
 }
 
-.details-main-div h1{
+.details-main-div h1 {
     font-size: 40px;
 }
 
@@ -17,7 +17,7 @@
     margin: 10px auto;
 }
 
-.details-desc-div button{
+.details-desc-div button {
     display: block;
     width: 120px;
     height: 30px;
@@ -35,15 +35,15 @@
     border-radius: 10px;
 }
 
-.details-desc-div div{
+.details-desc-div div {
     max-width: 300px;
     margin: 0 auto;
     padding: 10px;
     background-color: #A72121;
-    
+
 }
 
-.details-desc-div div > *{
+.details-desc-div div>* {
     padding: 5px;
     background-color: white;
     font-family: "Raleway", sans-serif;
@@ -55,4 +55,18 @@
     overflow-wrap: break-word;
     word-break: break-word;
     font-family: "Raleway", sans-serif;
+}
+
+.publish-button {
+    position: absolute;
+    top: 90px;
+    right: 5px;
+}
+
+@media (min-width: 768px) {
+    .publish-button {
+        top: 0px;
+        left: 0;
+        right: 0;
+    }
 }
