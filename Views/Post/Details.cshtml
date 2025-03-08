@@ -2,6 +2,7 @@
 
 @{
     ViewData["PageTitle"] = "Details";
+    var postId = Model.Id;
 }
 
 <div class="details-main-div">
@@ -19,13 +20,23 @@
             <p>@Html.DisplayFor(model => model.Description)</p>
         </div>
     </div>
-        
-        <div class="details-content-div">
-            <p>@Html.DisplayFor(model => model.Content)</p>
-        </div>
-    
+
+    <div class="details-content-div">
+        <p>@Html.DisplayFor(model => model.Content)</p>
+    </div>
+
     <a asp-action="Posts"><button class="return-button">← Tillbaka</button></a>
 </div>
 <div class="publish-div">
-    <a asp-action="Edit" asp-route-id="@Model?.Id"><button class="publish-button">Redigera</button></a> 
+    <a asp-action="Edit" asp-route-id="@Model?.Id"><button class="publish-button">Redigera</button></a>
 </div>
+
+@* lägg till en subscription på inlägget *@
+@ViewData["subError"]
+<form asp-controller="Subscription" asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@postId" />
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>

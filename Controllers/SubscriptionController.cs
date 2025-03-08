@@ -2,145 +2,97 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Backend.Data;
 using Backend.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SubscriptionController : ControllerBase
+    public class SubscriptionController : Controller
     {
         private readonly BlogDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public SubscriptionController(BlogDbContext context)
+        public SubscriptionController(BlogDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        // GET: api/Subscription
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Subscription>>> GetSubscriptions()
+        // GET: Subscription
+        public async Task<IActionResult> Index()
         {
-            var users = await _context.Users.ToListAsync();
-            var posts = await _context.Posts.ToListAsync();
-            return await _context.Subscriptions.ToListAsync();
+            var blogDbContext = _context.Subscriptions.Include(s => s.Post).Include(s => s.User);
+            return View(await blogDbContext.ToListAsync());
         }
 
-        // GET: api/Subscription/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Subscription>> GetSubscription(int id)
+        // POST: Subscription/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var users = await _context.Users.ToListAsync();
-            var posts = await _context.Posts.ToListAsync();
+            Console.WriteLine("funkar: " +id);
             var subscription = await _context.Subscriptions.FindAsync(id);
-
-            if (subscription == null)
+            if (subscription != null)
             {
-                return NotFound();
+                _context.Subscriptions.Remove(subscription);
             }
 
-            return subscription;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
-        // PUT: api/Subscription/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSubscription(int id, Subscription subscription)
-        {
-            if (id != subscription.Id)
-            {
-                return BadRequest();
-            }
-
-            // Hämtar en användare och lägger den i post.User
-            var user = await _context.Users.FindAsync(subscription.UserId);
-            // validering om man inte går från frontend
-            if (user == null)
-            {
-                return BadRequest("Användaren hittas inte i databasen");
-            }
-            subscription.User = user;
-
-            var post = await _context.Posts.FindAsync(subscription.PostId);
-            // validering om man inte går från frontend
-            if (post == null)
-            {
-                return BadRequest("Blogginlägget hittas inte i databasen");
-            }
-            subscription.Post = post;
-
-            _context.Entry(subscription).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SubscriptionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Subscription
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: Subscription/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<ActionResult<Subscription>> PostSubscription(Subscription subscription)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,UserId,PostId")] Subscription subscription)
         {
-            // Hämtar en användare och lägger den i post.User
-            var user = await _context.Users.FindAsync(subscription.UserId);
-            // validering om man inte går från frontend
-            if (user == null)
-            {
-                return BadRequest("Användaren hittas inte i databasen");
+            IdentityUser? user = await _userManager.GetUserAsync(HttpContext.User);
+            subscription.UserId = user?.Id;
+            subscription.User = await _context.Users.FindAsync(subscription.UserId);
+            subscription.Post = await _context.Posts.FindAsync(subscription.PostId);
+
+            var subscription1 = await _context.Subscriptions.Where(x => x.PostId == subscription.PostId).ToListAsync();
+            Console.WriteLine("sub: "+subscription1);
+            if (subscription1 != null)
+            {  
+                ViewData["subError"] = "Detta inlägg prenumereras redan på";
+                // FIXA SÅ DEN HÄR JÄVLA REDIRECT GÅR RÄTT
+                return RedirectToAction("Details/3", "Post");
             }
-            subscription.User = user;
-
-            var post = await _context.Posts.FindAsync(subscription.PostId);
-            // validering om man inte går från frontend
-            if (post == null)
+            
+            if (ModelState.IsValid)
             {
-                return BadRequest("Blogginlägget hittas inte i databasen");
+                _context.Add(subscription);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Posts", "Post");
             }
-            subscription.Post = post;
-
-            _context.Subscriptions.Add(subscription);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetSubscription", new { id = subscription.Id }, subscription);
+            return View(subscription);
         }
 
-        // DELETE: api/Subscription/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSubscription(int id)
+        // GET: Subscription/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            var subscription = await _context.Subscriptions.FindAsync(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var subscription = await _context.Subscriptions
+                .Include(s => s.Post)
+                .Include(s => s.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (subscription == null)
             {
                 return NotFound();
             }
 
-            _context.Subscriptions.Remove(subscription);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool SubscriptionExists(int id)
-        {
-            return _context.Subscriptions.Any(e => e.Id == id);
+            return View(subscription);
         }
     }
 }

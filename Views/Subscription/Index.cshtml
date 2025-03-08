@@ -1,0 +1,48 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<Backend.Models.Subscription>
+
+@{
+    ViewData["PageTitle"] = "Prenumerationer";
+
+    Subscription[] arr = Model.ToArray();
+    List<Subscription> subscriptions = [];
+    List<Post?> posts = [];
+    var user = User.Identity?.Name;
+
+    @* Lägger till de inlägg som användaren prenumerar på  *@
+    for (var i = 0; i < arr.Length; i++)
+    {
+        if (arr[i].User?.UserName == user)
+        {
+            subscriptions.Add(arr[i]);
+            posts.Add(arr[i].Post);
+        }
+    }
+}
+
+
+<h1 class="your-posts-heading">Prenumerationer</h1>
+
+<section class="your-posts-div">
+    @for (var i = 0; i < subscriptions.Count; i++)
+    {
+        <article class="discover-post">
+            <div class="discover-post-info">
+                <img src="~/logo.png" alt="" class="discover-post-img">
+                <div>
+                    <h3>@Html.DisplayFor(modelItem => posts[i].Title)</h3>
+
+                    <p>@Html.DisplayFor(modelItem => posts[i].Date), @Html.DisplayFor(modelItem => posts[i].User.UserName)
+                    </p>
+                </div>
+            </div>
+            @{int Id = @subscriptions[i].Id; }
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="@Id" />
+                <input type="submit" value="Delete" class="" />
+            </form>
+        </article>
+    }
+</section>
