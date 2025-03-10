@@ -2,162 +2,186 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Backend.Data;
 using Backend.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CollectionController : ControllerBase
+    public class CollectionController : Controller
     {
         private readonly BlogDbContext _context;
-
-        public CollectionController(BlogDbContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+        public CollectionController(BlogDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        // GET: api/Collection
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Collection>>> GetCollections()
+        // GET: Collection
+        public async Task<IActionResult> Index()
         {
-            var users = await _context.Users.ToListAsync();
-            var posts = await _context.Posts.ToListAsync();
-            return await _context.Collections.ToListAsync();
+            List<Collection> collections = await _context.Collections.ToListAsync();
+            List<int> collectionSizes = [];
+
+            // skapar en lista med mängden inlägg i de olika samlingarna användaren skapat
+            for (var i = 0; i < collections.Count; i++)
+            {
+                List<CollectionPost> collectionPosts = await _context.CollectionPosts.Where(t => t.CollectionId == collections[i].Id).ToListAsync();
+                collectionSizes.Add(collectionPosts.Count);
+            }
+            ViewData["collectionSizes"] = collectionSizes.ToArray();
+            
+            var blogDbContext = _context.Collections.Include(c => c.User);
+            return View(await blogDbContext.ToListAsync());
         }
 
-        // GET: api/Collection/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Collection>> GetCollection(int id)
+        // GET: Collection/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            var users = await _context.Users.ToListAsync();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
+            var blogDbContext = _context.Collections.Include(c => c.User);
             var posts = await _context.Posts.ToListAsync();
-            var collection = await _context.Collections.FindAsync(id);
+            var users = await _context.Users.ToListAsync();
+            List<CollectionPost> collectionPosts = await _context.CollectionPosts.Where(t => t.CollectionId == id).ToListAsync();
 
+
+            ViewData["colPosts"] = collectionPosts;
+            var collection = await _context.Collections
+                .Include(c => c.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (collection == null)
             {
                 return NotFound();
             }
 
-            return collection;
+            return View(collection);
         }
 
-        // PUT: api/Collection/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCollection(int id, Collection collection)
+        // GET: Collection/Create
+        public IActionResult Create()
+        {
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            return View();
+        }
+
+        // POST: Collection/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Title")] Collection collection)
+        {
+            // Hämtar user och lägger till på samlingen
+            IdentityUser? user = await _userManager.GetUserAsync(HttpContext.User);
+            collection.UserId = user?.Id;
+            collection.User = await _context.Users.FindAsync(collection.UserId);
+            if (ModelState.IsValid)
+            {
+                _context.Add(collection);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", collection.UserId);
+            return View(collection);
+        }
+
+        // GET: Collection/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var collection = await _context.Collections.FindAsync(id);
+            if (collection == null)
+            {
+                return NotFound();
+            }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", collection.UserId);
+            return View(collection);
+        }
+
+        // POST: Collection/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title")] Collection collection)
         {
             if (id != collection.Id)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            // Hämtar en användare och lägger den i post.User
-            var user = await _context.Users.FindAsync(collection.UserId);
-            // validering om man inte går från frontend
-            if (user == null)
+            // Hämtar user och lägger till på samlingen
+            IdentityUser? user = await _userManager.GetUserAsync(HttpContext.User);
+            collection.UserId = user?.Id;
+            collection.User = await _context.Users.FindAsync(collection.UserId);
+            if (ModelState.IsValid)
             {
-                return BadRequest("Användaren hittas inte i databasen");
-            }
-
-
-            var dbPosts = await _context.Posts.ToListAsync();
-
-            List<Post> posts = new List<Post>();
-            collection.User = user;
-
-            // uppdaterar PostId efter de poster som hittades i databsen
-            List<int> newPostId = new List<int>();
-            
-            for (int i = 0; i < dbPosts.Count; i++)
-            {
-                for (int index = 0; index < collection.PostsId?.Length; index++)
+                try
                 {
-                    if (collection.PostsId[index] == dbPosts[i].Id)
+                    _context.Update(collection);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CollectionExists(collection.Id))
                     {
-                        posts.Add(dbPosts[i]);
-                        newPostId.Add(dbPosts[i].Id);
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
                     }
                 }
+                return RedirectToAction(nameof(Index));
             }
-            
-            collection.Posts = posts;
-            collection.PostsId = newPostId.ToArray();
-            _context.Entry(collection).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CollectionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", collection.UserId);
+            return View(collection);
         }
 
-        // POST: api/Collection
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Collection>> PostCollection(Collection collection)
+        // GET: Collection/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            // Hämtar en användare och lägger den i post.User
-            var user = await _context.Users.FindAsync(collection.UserId);
-            // validering om man inte går från frontend
-            if (user == null)
+            if (id == null)
             {
-                return BadRequest("Användaren hittas inte i databasen");
+                return NotFound();
             }
 
-
-            var dbPosts = await _context.Posts.ToListAsync();
-            List<Post> posts = new List<Post>();
-            collection.User = user;
-
-            for (int i = 0; i < dbPosts.Count; i++)
-            {
-                for (int index = 0; index < collection.PostsId?.Length; index++)
-                {
-                    if (collection.PostsId[index] == dbPosts[i].Id)
-                    {
-                        posts.Add(dbPosts[i]);
-                    }
-                }
-            }
-
-            collection.Posts = posts;
-            _context.Collections.Add(collection);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCollection", new { id = collection.Id }, collection);
-        }
-
-        // DELETE: api/Collection/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCollection(int id)
-        {
-            var collection = await _context.Collections.FindAsync(id);
+            var collection = await _context.Collections
+                .Include(c => c.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (collection == null)
             {
                 return NotFound();
             }
 
-            _context.Collections.Remove(collection);
-            await _context.SaveChangesAsync();
+            return View(collection);
+        }
 
-            return NoContent();
+        // POST: Collection/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var collection = await _context.Collections.FindAsync(id);
+            if (collection != null)
+            {
+                _context.Collections.Remove(collection);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         private bool CollectionExists(int id)

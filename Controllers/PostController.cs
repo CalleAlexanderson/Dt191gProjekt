@@ -71,6 +71,9 @@ namespace Backend.Controllers
                 ViewData["sub"] = "false";
             }
 
+            
+            ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Title");
+
             return View(post);
         }
 

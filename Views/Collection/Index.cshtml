@@ -1,0 +1,47 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<Backend.Models.Collection>
+
+@{
+    ViewData["PageTitle"] = "Dina samlingar";
+
+    Collection[] arr = Model.ToArray();
+
+    List<Collection> yourCollection = [];
+    int[]? yourCollectionSize = ViewData["collectionSizes"] as int[];
+    var user = User.Identity.Name;
+
+    @* Lägger till de samlingar som användaren skapat  *@
+    for (var i = 0; i < arr.Length; i++)
+    {
+        if (arr[i].User.UserName == user)
+        {
+            yourCollection.Add(arr[i]);
+        }
+    }
+
+}
+
+
+
+<a asp-action="Create"><button class="create-button">Skapa samling</button></a>
+
+<h1 class="your-collection-heading">Dina samlingar</h1>
+
+<section class="your-collection-div">
+    @for (var i = 0; i < yourCollection.Count; i++)
+    {
+        <a asp-action="Details" asp-route-id="@yourCollection[i].Id">
+            <article class="discover-post">
+                <div class="discover-post-info">
+                    <h3>@yourCollection[i].Title</h3>
+                    <p>
+                        Blogginlägg: @yourCollectionSize[i]
+                    </p>
+                </div>
+            </article>
+        </a>
+
+    }
+</section>

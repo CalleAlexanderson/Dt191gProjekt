@@ -12,5 +12,7 @@ public class BlogDbContext : IdentityDbContext {
 
     public DbSet<Collection> Collections {get; set;}
 
+    public DbSet<CollectionPost> CollectionPosts {get; set;}
+
     public DbSet<Subscription> Subscriptions {get; set;}
 }
