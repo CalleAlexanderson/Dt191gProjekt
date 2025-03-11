@@ -20,6 +20,8 @@
         @Html.DisplayFor(model => model.User.UserName)
     </div>
     <img src="~/logo.png" class="details-img">
+
+    @* knappen som används för att prenumerera på ett inlägg *@
     <div class="details-sub-div">
         @if (subscribe == "true")
         {
@@ -38,16 +40,15 @@
         }
     </div>
 
+    @* lägger till inlägget i olika samlingar som användaren skapat *@
     <div class="details-collection-div">
         <form asp-controller="CollectionPost" asp-action="Create">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="@postId" />
 
-                
-            @* GÖRA SÅ MAN KAN KLICKA I BOXARNA FÖR ATT LÄGGA TILL I/TA BORT FRÅN SAMLING *@
+            @* genererar checkboxar för varje samling *@
             <div>
-                
                 <ul>
                 @for (var i = 0; i < Model.Collections.Count; i++) {
                     <li>

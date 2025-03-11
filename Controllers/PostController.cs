@@ -92,7 +92,7 @@ namespace Backend.Controllers
                     {
                         // Console.WriteLine("Posten: "+inCollection[i].Post.Title+" collection mathcar med collection: " +detailsCollection[index].Title);
                         // Console.WriteLine("is checked: "+detailsCollection[i].IsChecked);
-                        detailsCollection[i].IsChecked = true;
+                        detailsCollection[index].IsChecked = true;
                         break;
                     }
                 }
