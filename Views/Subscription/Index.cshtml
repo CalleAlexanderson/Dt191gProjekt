@@ -23,9 +23,9 @@
 }
 
 
-<h1 class="your-posts-heading">Prenumerationer</h1>
+<h1 class="subs-heading">Prenumerationer</h1>
 
-<section class="your-posts-div">
+<section class="subs-div">
     @for (var i = 0; i < subscriptions.Count; i++)
     {
         <a asp-controller="Post" asp-action="Details" asp-route-id="@posts[i].Id">

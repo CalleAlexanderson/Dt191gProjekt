@@ -1,0 +1,37 @@
+.subs-heading {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 40px;
+}
+
+.subs-div{
+    width: 95%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 5px 0;
+    background-color: #c24040;
+}
+
+article {
+    transition: 0.1s;
+}
+
+article:hover {
+    box-shadow: 2px 2px 4px black;
+    transform: scale(1.1);
+}
+
+
+@media (min-width: 1024px) {
+
+    .subs-heading {
+        font-size: 48px;
+    }
+    
+
+    .subs-div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        max-width: 1000px;
+    }
+}

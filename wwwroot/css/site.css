@@ -253,6 +253,11 @@ body {
     color: black;
 }
 
+.discover-post-info h3:hover {
+  text-decoration: underline;
+}
+
+
 .discover-post-text {
     padding: 5px;
     line-height: 20px;
