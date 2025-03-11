@@ -24,7 +24,7 @@ namespace Backend.Controllers
         // GET: CollectionPost
         public async Task<IActionResult> Index()
         {
-           
+
             var blogDbContext = _context.CollectionPosts.Include(c => c.Collection);
             return View(await blogDbContext.ToListAsync());
         }
@@ -60,27 +60,81 @@ namespace Backend.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PostId")] CollectionPost collectionPost, string cId)
+        public async Task<IActionResult> Create([Bind("Id,PostId")] CollectionPost collectionPost, List<Collection> collections)
         {
+
+            Console.WriteLine(collectionPost.PostId);
+            Console.WriteLine(collections.Count);
             var cPosts = await _context.CollectionPosts.ToListAsync();
-            collectionPost.CollectionId = int.Parse(cId);
-            collectionPost.Post = await _context.Posts.FindAsync(collectionPost.PostId);
-            for (var i = 0; i < cPosts.Count; i++)
+            for (var i = 0; i < collections.Count; i++)
             {
-                if (cPosts[i].CollectionId == collectionPost.CollectionId && cPosts[i].PostId == collectionPost.PostId)
+                Console.WriteLine(collections[i].Id);
+                Console.WriteLine(collections[i].Title);
+                Console.WriteLine(collections[i].IsChecked);
+
+                if (!collections[i].IsChecked)
                 {
-                    return RedirectToAction("Details", "Post", new { Id = collectionPost.PostId });
+                    // om checkbox inte är checkad så tas CollectionPosten bort från tabellen
+                    Console.WriteLine("är inte checked");
+                    for (var u = 0; u < cPosts.Count; u++)
+                    {
+                        if (cPosts[u].CollectionId == collections[i].Id && cPosts[u].PostId == collectionPost.PostId)
+                        {
+                            Console.WriteLine("inlägg hittades U: " + collections[i].Id);
+                            Console.WriteLine("cPosts[u].PostId U: " + cPosts[u].Id);
+
+                            _context.CollectionPosts.Remove(cPosts[u]);
+                            await _context.SaveChangesAsync();
+
+                        }
+                    }
+                }
+                else
+                {
+                    // FORSTÄTT MED ATT SKAPA COLLECTIONPOST
+                    for (var index = 0; index < cPosts.Count; index++)
+                    {
+                        Console.WriteLine("cPosts[i].PostId: " + cPosts[index].PostId);
+                        Console.WriteLine("collectionPost.PostId: " + collectionPost.PostId);
+                        if (cPosts[i].PostId == collectionPost.PostId)
+                        {
+                            Console.WriteLine("inlägget hittades");
+                            // return RedirectToAction("Details", "Post", new { Id = collectionPost.PostId });
+                        }
+                        else
+                        {
+                            Console.WriteLine("inlägget hittades inte");
+
+                        }
+                        Console.WriteLine();
+                    }
+
                 }
             }
 
-            if (ModelState.IsValid)
-            {
-                _context.Add(collectionPost);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "Post", new { Id = collectionPost.PostId });
-            }
+            // await _context.SaveChangesAsync();
+
+
+
+            // collectionPost.CollectionId = int.Parse(cId);
+            // collectionPost.Post = await _context.Posts.FindAsync(collectionPost.PostId);
+
+            // for (var i = 0; i < cPosts.Count; i++)
+            // {
+            //     if (cPosts[i].CollectionId == collectionPost.CollectionId && cPosts[i].PostId == collectionPost.PostId)
+            //     {
+            //         return RedirectToAction("Details", "Post", new { Id = collectionPost.PostId });
+            //     }
+            // }
+
+            // if (ModelState.IsValid)
+            // {
+            //     _context.Add(collectionPost);
+            //     await _context.SaveChangesAsync();
+            //     return RedirectToAction("Details", "Post", new { Id = collectionPost.PostId });
+            // }
             ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Title", collectionPost.CollectionId);
-                return RedirectToAction("Details", "Post", new { Id = collectionPost.PostId });
+            return RedirectToAction("Details", "Post", new { Id = collectionPost.PostId });
         }
 
         // GET: CollectionPost/Edit/5

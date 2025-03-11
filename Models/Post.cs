@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Models;
@@ -20,4 +21,7 @@ public class Post {
     public IdentityUser? User {get; set;}
     
     public string? UserId {get; set;}
+
+    [NotMapped]
+    public List<Collection>? Collections {get; set;}
 }

@@ -57,7 +57,9 @@ namespace Backend.Controllers
             if (post.User == user)
             {
                 ViewData["own"] = "true";
-            } else {
+            }
+            else
+            {
                 ViewData["own"] = "false";
             }
 
@@ -67,12 +69,41 @@ namespace Backend.Controllers
             {
                 ViewData["subId"] = subscription[0].Id;
                 ViewData["sub"] = "true";
-            } else {
+            }
+            else
+            {
                 ViewData["sub"] = "false";
             }
 
-            
             ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Title");
+            var inCollection = await _context.CollectionPosts.Where(x => x.PostId == post.Id).ToListAsync();
+            var detailsCollection = await _context.Collections.ToListAsync();
+
+            ViewData["inCollection"] = inCollection;
+            ViewData["detailsCollection"] = detailsCollection;
+
+            for(var i = 0; i < inCollection?.Count; i++) 
+            {
+                // Console.WriteLine("Posten: "+inCollection[i].Post.Title+" är i collection: "+inCollection[i].Collection.Title);
+                // kollar om posten redan är i en samling 
+                for (var index = 0; index < detailsCollection.Count; index++)
+                {
+                    if (inCollection[i].CollectionId == detailsCollection[index].Id)
+                    {
+                        // Console.WriteLine("Posten: "+inCollection[i].Post.Title+" collection mathcar med collection: " +detailsCollection[index].Title);
+                        // Console.WriteLine("is checked: "+detailsCollection[i].IsChecked);
+                        detailsCollection[i].IsChecked = true;
+                        break;
+                    }
+                }
+            }
+
+            for (var i = 0; i < detailsCollection.Count; i++)
+            {
+                    // System.Console.WriteLine("checked new loop: "+detailsCollection[i].IsChecked);
+            }
+
+            post.Collections = detailsCollection;
 
             return View(post);
         }
@@ -89,7 +120,7 @@ namespace Backend.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Description,Content")] Post post)
-        {   
+        {
             // Hämtar user och lägger till på posten
             IdentityUser? user = await _userManager.GetUserAsync(HttpContext.User);
             post.UserId = user?.Id;

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Models;
@@ -11,4 +12,7 @@ public class Collection {
 
     public IdentityUser? User {get; set;}
     public string? UserId {get; set;}
+
+    [NotMapped]
+    public bool IsChecked {get; set;}
 }
