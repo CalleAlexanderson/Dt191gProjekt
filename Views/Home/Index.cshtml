@@ -11,7 +11,7 @@
     <p>Create your own blog today</p>
     @if (SignInManager.IsSignedIn(User))
 {
-    <a class="index-main-a-btn" asp-area="" asp-controller="Post" asp-action="Create"><button class="index-main-btn">Skapa blogginlägg</button></a>
+    <a class="index-main-a-btn" asp-controller="Post" asp-action="Posts"><button class="index-main-btn">Min blogg</button></a>
 }
 else
 {

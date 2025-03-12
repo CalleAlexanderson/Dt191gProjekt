@@ -33,7 +33,7 @@ footer > *{
 
 #nav-toggle-btn:hover .nav-menu-span,
 #nav-toggle-btn:focus .nav-menu-span{
-  background-color: aqua;
+  background-color: #A72121;
 }
 
 #nav-div {
@@ -57,6 +57,34 @@ footer > *{
   border-radius: 2px;
   background-color: black;
 }
+
+.nav-menu-span:first-child {
+  transform-origin: 15% 0%;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-menu-span.open:first-child {
+  transform: rotate(45deg);
+}
+
+.nav-menu-span:nth-child(2) {
+  transition: transform 0.1s ease-out;
+}
+
+.nav-menu-span:nth-child(2).open {
+  transform: scaleY(0);
+}
+
+.nav-menu-span:Last-child {
+  transform-origin: 0% 85%;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-menu-span.open:Last-child {
+  transform: rotate(-45deg);
+}
+
+
 
 .nav-hidden {
   transform: translateX(-100%);

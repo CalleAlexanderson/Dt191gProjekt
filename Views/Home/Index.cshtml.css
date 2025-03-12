@@ -19,11 +19,18 @@
 }
 
 .index-main-div h1,
-.index-main-div p{
+.index-main-div p,
+h2{
     color: white;
     text-align: center;
     text-shadow: 1px 1px 1px black;
     word-break: break-all;
+}
+
+h2 {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 5px;
 }
 
 .index-main-btn {

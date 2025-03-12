@@ -11,12 +11,19 @@ function headerInit() {
     let navDiv = document.getElementById('nav-div');
     let dropDownBtn = document.getElementById('profile-button');
     let dropDown = document.getElementById('profile-dropdown');
+    let spans = document.getElementsByClassName('nav-menu-span');
 
     navbtn.addEventListener("click", () => {
         if (navDiv.classList.contains("nav-hidden")) {
             navDiv.classList.remove("nav-hidden")
+            for (let index = 0; index < spans.length; index++) {
+                spans[index].classList.add("open")
+            }
         } else {
             navDiv.classList.add("nav-hidden")
+            for (let index = 0; index < spans.length; index++) {
+                spans[index].classList.remove("open")
+            }
         }
     })
 
@@ -30,11 +37,11 @@ function headerInit() {
         dropDownBtn.addEventListener("mouseleave", () => {
             dropDown.classList.add("hidden");
         })
-    
+
         dropDown.addEventListener("mouseenter", () => {
             dropDown.classList.remove("hidden");
         })
-    
+
         dropDown.addEventListener("mouseleave", () => {
             dropDown.classList.add("hidden");
         })
