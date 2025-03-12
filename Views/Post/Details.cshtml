@@ -3,6 +3,7 @@
 @{
     ViewData["PageTitle"] = Model.Title;
     var subscribe = ViewData["sub"];
+    var loggedIn = ViewData["loggedIn"];
     var Id = ViewData["subId"];
     var owns = ViewData["own"];
     var postId = Model.Id;
@@ -21,51 +22,55 @@
     </div>
     <img src="~/logo.png" class="details-img">
 
-    @* knappen som används för att prenumerera på ett inlägg *@
-    <div class="details-sub-div">
-        @if (subscribe == "true")
-        {
-            <form asp-controller="Subscription" asp-action="Delete">
-                <input type="hidden" asp-for="@Id" />
-                <button type="submit" class="details-sub">Avprenumerera</button>
-            </form>
-        }
-        else
-        {
-            <form asp-controller="Subscription" asp-action="Create">
+    @if (loggedIn == "true")
+    {
+        @* knappen som används för att prenumerera på ett inlägg *@
+        <div class="details-sub-div">
+            @if (subscribe == "true")
+            {
+                <form asp-controller="Subscription" asp-action="Delete">
+                    <input type="hidden" asp-for="@Id" />
+                    <button type="submit" class="details-sub">Avprenumerera</button>
+                </form>
+            }
+            else
+            {
+                <form asp-controller="Subscription" asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="@postId" />
+                    <button type="submit" class="details-unsub">Prenumerera</button>
+                </form>
+            }
+        </div>
+
+        @* lägger till inlägget i olika samlingar som användaren skapat *@
+        <button id="post-details-collection-button" class="post-details-collection-button-dormant">Samlingar</button>
+        <div id="post-details-collection-div" class="hidden">
+            <form asp-controller="CollectionPost" asp-action="Create">
+
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="@postId" />
-                <button type="submit" class="details-unsub">Prenumerera</button>
+
+                @* genererar checkboxar för varje samling *@
+                <div>
+                    <ul>
+                        @for (var i = 0; i < Model.Collections.Count; i++)
+                        {
+                            <li>
+                                @Html.CheckBoxFor(m => Model.Collections[i].IsChecked)
+                                <p>@Model.Collections[i].Title</p>
+                                @Html.HiddenFor(m => Model.Collections[i].Id)
+                                @Html.HiddenFor(m => Model.Collections[i].Title)
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+                <button type="submit" class="post-details-collection-form-button">Uppdatera</button>
             </form>
-        }
-    </div>
+        </div>
+    }
 
-    @* lägger till inlägget i olika samlingar som användaren skapat *@
-    <button id="post-details-collection-button" class="post-details-collection-button-dormant">Samlingar</button>
-    <div id="post-details-collection-div" class="hidden">
-        <form asp-controller="CollectionPost" asp-action="Create">
-
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="@postId" />
-
-            @* genererar checkboxar för varje samling *@
-            <div>
-                <ul>
-                    @for (var i = 0; i < Model.Collections.Count; i++)
-                    {
-                        <li>
-                            @Html.CheckBoxFor(m => Model.Collections[i].IsChecked)
-                            <p>@Model.Collections[i].Title</p>
-                            @Html.HiddenFor(m => Model.Collections[i].Id)
-                            @Html.HiddenFor(m => Model.Collections[i].Title)
-                        </li>
-                    }
-                </ul>
-            </div>
-
-            <button type="submit" class="post-details-collection-form-button">Uppdatera</button>
-        </form>
-    </div>
     <div class="details-desc-div">
         <button id="details-show-desc-btn" class="details-desc-div-btn-dormant">Description</button>
         <div id="details-desc-toggle-div" class="hidden">

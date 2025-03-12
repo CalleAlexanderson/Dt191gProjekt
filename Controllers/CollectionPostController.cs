@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Backend.Data;
 using Backend.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Backend.Controllers
 {
@@ -22,6 +23,7 @@ namespace Backend.Controllers
         }
 
         // GET: CollectionPost
+        [Authorize]
         public async Task<IActionResult> Index()
         {
 
@@ -30,6 +32,7 @@ namespace Backend.Controllers
         }
 
         // GET: CollectionPost/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,6 +52,7 @@ namespace Backend.Controllers
         }
 
         // GET: CollectionPost/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Title");
@@ -58,6 +62,7 @@ namespace Backend.Controllers
         // POST: CollectionPost/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,PostId")] CollectionPost collectionPost, List<Collection> collections)
@@ -126,6 +131,7 @@ namespace Backend.Controllers
         }
 
         // GET: CollectionPost/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -145,6 +151,7 @@ namespace Backend.Controllers
         // POST: CollectionPost/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,PostsId,CollectionId")] CollectionPost collectionPost)
@@ -179,6 +186,7 @@ namespace Backend.Controllers
         }
 
         // GET: CollectionPost/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -198,6 +206,7 @@ namespace Backend.Controllers
         }
 
         // POST: CollectionPost/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

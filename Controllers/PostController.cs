@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Backend.Data;
 using Backend.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Backend.Controllers
 {
@@ -29,6 +30,7 @@ namespace Backend.Controllers
         }
 
         // GET: Post/Posts
+        [Authorize]
         public async Task<IActionResult> Posts()
         {
             var blogDbContext = _context.Posts.Include(p => p.User);
@@ -61,6 +63,12 @@ namespace Backend.Controllers
             else
             {
                 ViewData["own"] = "false";
+            }
+
+            if (user == null) {
+                ViewData["loggedIn"] = "false";
+            } else {
+                ViewData["loggedIn"] = "true";
             }
 
             // skickar med om post är prenumererad på
@@ -108,12 +116,14 @@ namespace Backend.Controllers
             return View(post);
         }
 
+        [Authorize]
         // GET: Post/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize]
         // POST: Post/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -135,6 +145,7 @@ namespace Backend.Controllers
             return View(post);
         }
 
+        [Authorize]
         // GET: Post/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -152,6 +163,7 @@ namespace Backend.Controllers
             return View(post);
         }
 
+        [Authorize]
         // POST: Post/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -192,6 +204,7 @@ namespace Backend.Controllers
             return View(post);
         }
 
+        [Authorize]
         // GET: Post/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -211,6 +224,7 @@ namespace Backend.Controllers
             return View(post);
         }
 
+        [Authorize]
         // POST: Post/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

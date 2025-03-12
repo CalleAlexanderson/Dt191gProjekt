@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Backend.Data;
 using Backend.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Backend.Controllers
 {
@@ -22,6 +23,7 @@ namespace Backend.Controllers
         }
 
         // GET: Collection
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             List<Collection> collections = await _context.Collections.ToListAsync();
@@ -40,6 +42,7 @@ namespace Backend.Controllers
         }
 
         // GET: Collection/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -68,6 +71,7 @@ namespace Backend.Controllers
          // POST: Collection/Details/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditCollectionPosts([Bind("Id,Title")] Collection collection, List<CollectionPost> posts)
@@ -87,6 +91,7 @@ namespace Backend.Controllers
         }
 
         // GET: Collection/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
@@ -96,6 +101,7 @@ namespace Backend.Controllers
         // POST: Collection/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title")] Collection collection)
@@ -115,6 +121,7 @@ namespace Backend.Controllers
         }
 
         // GET: Collection/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -134,6 +141,7 @@ namespace Backend.Controllers
         // POST: Collection/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title")] Collection collection)
@@ -172,6 +180,7 @@ namespace Backend.Controllers
         }
 
         // GET: Collection/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -191,6 +200,7 @@ namespace Backend.Controllers
         }
 
         // POST: Collection/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
