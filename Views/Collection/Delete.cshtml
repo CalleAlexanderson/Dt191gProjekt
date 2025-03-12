@@ -21,7 +21,9 @@
     <a asp-action="Index"><button class="return-button">← Tillbaka</button></a>
 </div>
 
-<form asp-action="Delete">
-    <input type="hidden" asp-for="Id" />
-    <input type="submit" value="Radera" class="publish-button" />
-</form>
+<div class="publish-div">
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Radera" class="publish-button" />
+    </form>
+</div>

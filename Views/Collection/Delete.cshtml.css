@@ -19,7 +19,7 @@ article {
     width: 80%;
 }
 
-.discover-post-info{
+.discover-post-info {
     display: block;
 }
 
@@ -39,12 +39,20 @@ article:hover {
 }
 
 .publish-button {
-    margin: 20px auto;
+    position: absolute;
+    top: 90px;
+    right: 5px;
 }
 
 @media (min-width: 768px) {
 
     h1 {
         margin: 20px auto;
+    }
+
+    .publish-button {
+        top: 0px;
+        left: 0;
+        right: 0;
     }
 }

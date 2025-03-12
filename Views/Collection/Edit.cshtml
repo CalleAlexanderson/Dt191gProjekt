@@ -1,35 +1,34 @@
 @model Backend.Models.Collection
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["PageTitle"] = "Redigera";
 }
 
-<h1>Edit</h1>
+<h1 class="edit-posts-heading">Redigera</h1>
+<div class="edit-form">
+    <a asp-action="Posts"><button class="return-button">← Tillbaka</button></a>
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="collection-title-div">
+            <label asp-for="Title" class="visually-hidden"></label>
+            @Html.TextArea("Title", new { @class = "desc-input", placeholder ="The perfect Title!" })
+            <span asp-validation-for="Title"></span>
+        </div>
 
-<h4>Collection</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        <div class="publish-div">
+            <input type="submit" class="publish-button" value="Spara" />
+        </div>
+    </form>
 </div>
 
+
 <div>
-    <a asp-action="Delete" asp-route-id="@Model?.Id">Radera</a>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id"><button class="delete-button">Radera</button></a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

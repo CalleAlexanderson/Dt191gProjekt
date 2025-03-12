@@ -1,12 +1,16 @@
 h1 {
+    margin: 60px auto 20px;
     text-align: center;
-    width: 90%;
-    margin: 70px auto 30px;
-    word-break: break-all;
+    font-size: 48px;
 }
 
-.discover-post {
-    border: 1px solid black;
+.collection-title-div textarea{
+    width: 300px;
+}
+
+.publish-div{
+    width: max-content;
+    margin: 0 auto;
 }
 
 .publish-button {
@@ -15,12 +19,7 @@ h1 {
     right: 5px;
 }
 
-article:hover h3 {
-    text-decoration: underline;
-}
-
 @media (min-width: 768px) {
-
     .publish-button {
         top: 0px;
         left: 0;

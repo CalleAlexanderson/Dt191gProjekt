@@ -1,0 +1,14 @@
+h1 {
+    margin: 60px auto 20px;
+    text-align: center;
+    font-size: 48px;
+}
+
+.collection-title-div textarea{
+    width: 300px;
+}
+
+.publish-div{
+    width: max-content;
+    margin: 0 auto;
+}
