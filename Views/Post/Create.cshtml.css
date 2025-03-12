@@ -4,6 +4,7 @@
 
 .create-posts-heading h1 {
     font-size: 48px;
+    word-break: break-all;
 }
 
 .create-form{ 

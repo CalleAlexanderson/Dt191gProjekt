@@ -12,6 +12,7 @@
 
 .discover-posts-heading h1 {
     font-size: 48px;
+    word-break: break-all;
 }
 
 .discover-posts-heading p {

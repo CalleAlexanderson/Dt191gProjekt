@@ -17,11 +17,29 @@
     background-color: #6B0000;
 }
 
+.my-posts-button{
+    margin: 7px 10px;
+}
+
+.return-button {
+    right: 15px;
+    left: auto;
+}
+
 @media (min-width: 768px) {
     .my-posts-button{
         position: absolute;
         right: 240px;
         top: 15px;
+    }
+    
+    .return-button {
+        right: auto;
+        left: 210px;
+    }
+
+    .my-posts-button{
+        margin: 0;
     }
   }
 

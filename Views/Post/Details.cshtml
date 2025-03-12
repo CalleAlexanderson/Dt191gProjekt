@@ -27,7 +27,7 @@
         {
             <form asp-controller="Subscription" asp-action="Delete">
                 <input type="hidden" asp-for="@Id" />
-                <button type="submit" class="details-unsub">Prenumerera</button>
+                <button type="submit" class="details-sub">Avprenumerera</button>
             </form>
         }
         else
@@ -35,7 +35,7 @@
             <form asp-controller="Subscription" asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="@postId" />
-                <button type="submit" class="details-sub">Avprenumerera</button>
+                <button type="submit" class="details-unsub">Prenumerera</button>
             </form>
         }
     </div>

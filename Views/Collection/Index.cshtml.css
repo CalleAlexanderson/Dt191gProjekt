@@ -1,0 +1,35 @@
+h1 {
+    margin: 20px auto;
+    text-align: center;
+    font-size: 40px;
+    word-break: break-all;
+}
+
+.your-collection-div {
+    width: 95%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 5px 0;
+    background-color: #ecb959;
+}
+
+article {
+    padding: 10px;
+    transition: 0.1s;
+}
+
+article:hover {
+    box-shadow: 2px 2px 4px black;
+    transform: scale(1.1);
+}
+
+.discover-post-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.discover-post-info p{
+    margin-left: 20px;
+    font-size: 20px;
+}

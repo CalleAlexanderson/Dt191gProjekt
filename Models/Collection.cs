@@ -15,4 +15,7 @@ public class Collection {
 
     [NotMapped]
     public bool IsChecked {get; set;}
+
+    [NotMapped]
+    public List<CollectionPost>? Posts {get; set;}
 }

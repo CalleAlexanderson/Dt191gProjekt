@@ -51,9 +51,7 @@ namespace Backend.Controllers
             var posts = await _context.Posts.ToListAsync();
             var users = await _context.Users.ToListAsync();
             List<CollectionPost> collectionPosts = await _context.CollectionPosts.Where(t => t.CollectionId == id).ToListAsync();
-
-
-            ViewData["colPosts"] = collectionPosts;
+            
             var collection = await _context.Collections
                 .Include(c => c.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -62,7 +60,30 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
+            collection.Posts = collectionPosts;
+
             return View(collection);
+        }
+
+         // POST: Collection/Details/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCollectionPosts([Bind("Id,Title")] Collection collection, List<CollectionPost> posts)
+        {
+            // tar bort de inlägg som checkats 
+            for (var i = 0; i < posts.Count; i++)
+            {
+                if (posts[i].IsChecked)
+                {
+                    _context.CollectionPosts.Remove(posts[i]);
+                }
+            }
+
+            await _context.SaveChangesAsync(); 
+            
+            return RedirectToAction("Details", new { id = collection.Id });
         }
 
         // GET: Collection/Create

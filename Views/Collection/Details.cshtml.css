@@ -1,0 +1,60 @@
+h1 {
+    margin: 60px auto 20px;
+    text-align: center;
+    font-size: 40px;
+    word-break: break-all;
+}
+
+.details-collection-form-div {
+    width: 95%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 5px 0;
+    background-color: #ecb959;
+}
+
+h3 {
+    margin-right: 35px;
+}
+
+.collection-article-div{
+    display: grid;
+    grid-template-columns: auto 50px;
+}
+
+article {
+    width: 95%;
+}
+
+.collection-details-checkbox-div {
+    display: block;
+    height: 100%;
+    width: 50px;
+}
+
+.publish-button {
+    margin: 20px auto;
+    width: max-content;
+}
+
+.edit-button {
+    position: absolute;
+    top: 90px;
+    right: 5px;
+    margin: 0;
+}
+
+.collection-details-info{
+    width: 280px;
+    margin: 0 auto 10px;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Raleway", sans-serif;
+}
+
+@media (min-width: 768px) {
+
+    h1 {
+        margin: 20px auto;
+    }
+}

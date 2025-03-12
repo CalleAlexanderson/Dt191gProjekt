@@ -47,7 +47,7 @@ main {
   position: absolute;
 }
 
-.field-validation-error{
+.field-validation-error {
   width: max-content;
   padding: 5px;
   border-bottom-left-radius: 10px;
@@ -144,6 +144,7 @@ body {
   text-align: center;
   color: white;
   text-shadow: 1px 1px 1px black;
+  word-break: break-all;
 }
 
 .account-page-main-div {
@@ -235,21 +236,22 @@ body {
 }
 
 .discover-post {
-    width: 90%;
-    max-width: 420px;
-    margin: 5px auto;
-    background-color: white;
+  width: 90%;
+  max-width: 420px;
+  margin: 5px auto;
+  background-color: white;
 }
 
 .discover-post-info {
-    display: grid;
-    grid-template-columns: 100px auto;
-    padding: 5px;
+  display: grid;
+  grid-template-columns: 100px auto;
+  padding: 5px;
 }
 
 .discover-post-info h3,
-.discover-post-info p{
-    color: black;
+.discover-post-info p {
+  color: black;
+  word-break: break-all;
 }
 
 .discover-post-info h3:hover {
@@ -258,13 +260,13 @@ body {
 
 
 .discover-post-text {
-    padding: 5px;
-    line-height: 20px;
+  padding: 5px;
+  line-height: 20px;
 }
 
 /* Post details */
 
-.details-img{
+.details-img {
   display: block;
   width: 100%;
   height: auto;
@@ -273,8 +275,13 @@ body {
   object-fit: cover;
 }
 
-#post-details-collection-div input {
+#post-details-collection-div input,
+.collection-details-checkbox-div input {
   scale: 2;
+}
+
+.collection-details-checkbox-div input {
+  margin: 15px 10px;
 }
 
 /* Post admin gränssnitt */
@@ -356,6 +363,25 @@ body {
   background-color: #6B0000;
 }
 
+.create-button {
+  display: block;
+  width: 250px;
+  height: 50px;
+  margin: 30px auto 10px;
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #A72121;
+  color: white;
+  font-size: 28px;
+  transition: 0.25s background;
+  cursor: pointer;
+}
+
+.create-button:hover {
+  background-color: #6B0000;
+}
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -384,7 +410,7 @@ body {
     top: 15px;
     left: 375px;
   }
-  
+
   .return-button {
     top: 15px;
     left: 210px;

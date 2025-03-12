@@ -23,6 +23,7 @@
     color: white;
     text-align: center;
     text-shadow: 1px 1px 1px black;
+    word-break: break-all;
 }
 
 .index-main-btn {

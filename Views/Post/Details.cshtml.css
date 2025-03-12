@@ -6,6 +6,7 @@
 
 .details-main-div h1 {
     font-size: 40px;
+    word-break: break-all;
 }
 
 .details-info-div {
