@@ -24,11 +24,68 @@ article:hover {
     transform: scale(1.1);
 }
 
+.my-subs-button,
+.my-collection-button {
+    visibility: hidden;
+    position: absolute;
+}
+
 @media (min-width: 768px) {
+
+    .my-subs-button,
+    .my-collection-button {
+        position: fixed;
+        visibility: initial;
+        display: block;
+        top: 113px;
+        width: max-content;
+        height: 50px;
+        padding: 5px;
+        border: 2px solid black;
+        border-radius: 10px;
+        background-color: #A72121;
+        color: white;
+        font-size: 28px;
+        transition: 0.5s background;
+        cursor: pointer;
+    }
+
+    .my-subs-button {
+        right: 20px;
+    }
+
+    .my-collection-button {
+        left: 100px;
+    }
+
+    .my-subs-button:hover,
+    .my-collection-button:hover,
+    .my-subs-button:focus,
+    .my-collection-button:focus {
+        background-color: #6B0000;
+    }
 }
 
 @media (min-width: 1024px) {
+    .my-subs-button,
+    .my-collection-button {
+        position: absolute;
+        top: 15px;
+        height: 50px;
+        padding: 5px;
+        border: 2px solid black;
+        border-radius: 10px;
+        font-size: 28px;
+    }
+
+    .my-subs-button {
+        right: 225px;
+    }
+
+    .my-collection-button {
+        left: auto;
+        right: 455px;
+    }
 }
 
-@media (min-width: 1440px) {
-}
+@media (min-width: 1440px) {}
