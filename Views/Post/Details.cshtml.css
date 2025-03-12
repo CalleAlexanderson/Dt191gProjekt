@@ -67,7 +67,8 @@
 }
 
 .details-sub,
-.details-unsub{
+.details-unsub,
+#post-details-collection-button{
     display: block;
     margin: 20px auto;
     padding: 5px;
@@ -87,13 +88,78 @@
     background-color: white;
 }
 
-.details-unsub:hover
+.details-unsub:hover,
+.details-unsub:focus
 {
     background-color: #A72121;
 }
 
-.details-sub:hover{
+.details-sub:hover,
+.details-sub:focus{
     background-color: #c24040;
+}
+
+#post-details-collection-button {
+    width: 300px;
+    background-color: #A72121;
+    color: white;
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.post-details-collection-button-dormant {
+    margin-bottom: 20px !important;
+    border-radius: 10px !important;
+}
+
+#post-details-collection-button:hover,
+#post-details-collection-button:focus {
+    background-color: #6B0000;
+}
+
+#post-details-collection-div {
+    width: 286px;
+    margin: 0 auto;
+    padding: 5px;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #D9D9D9;
+}
+
+#post-details-collection-div ul {
+    list-style: none;
+}
+
+#post-details-collection-div li {
+    margin: 10px;
+}
+
+#post-details-collection-div p {
+    margin-left: 10px;
+    display: inline;
+    font-size: 24px;
+}
+
+.post-details-collection-form-button{
+    display: block;
+    margin: 5px auto;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #c24040;
+    color: white;
+    font-size: 20px;
+    transition: 0.5s background;
+    cursor: pointer;
+}
+
+.post-details-collection-form-button:hover,
+.post-details-collection-form-button:focus{
+    background-color: #A72121;
 }
 
 @media (min-width: 768px) {
@@ -109,7 +175,12 @@
     }
 
     .details-sub,
-    .details-unsub {
-        margin: 20px 10px;
+    .details-unsub,
+    #post-details-collection-button {
+        margin: 20px 10px 0;
+    }
+    
+    #post-details-collection-div{
+        margin: 0 10px 20px;
     }
 }

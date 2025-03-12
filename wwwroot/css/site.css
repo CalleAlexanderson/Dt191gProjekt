@@ -247,7 +247,6 @@ body {
     padding: 5px;
 }
 
-
 .discover-post-info h3,
 .discover-post-info p{
     color: black;
@@ -272,6 +271,10 @@ body {
   max-height: 300px;
   margin: 10px 0 30px;
   object-fit: cover;
+}
+
+#post-details-collection-div input {
+  scale: 2;
 }
 
 /* Post admin gränssnitt */

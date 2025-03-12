@@ -41,7 +41,8 @@
     </div>
 
     @* lägger till inlägget i olika samlingar som användaren skapat *@
-    <div class="details-collection-div">
+    <button id="post-details-collection-button" class="post-details-collection-button-dormant">Samlingar</button>
+    <div id="post-details-collection-div" class="hidden">
         <form asp-controller="CollectionPost" asp-action="Create">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -50,21 +51,19 @@
             @* genererar checkboxar för varje samling *@
             <div>
                 <ul>
-                @for (var i = 0; i < Model.Collections.Count; i++) {
-                    <li>
-                        @Html.CheckBoxFor(m=>Model.Collections[i].IsChecked)
-                        @Model.Collections[i].Title
-                        @Html.HiddenFor(m=>Model.Collections[i].Id)
-                        @Html.HiddenFor(m=>Model.Collections[i].Title)
-                    </li>
-                }
+                    @for (var i = 0; i < Model.Collections.Count; i++)
+                    {
+                        <li>
+                            @Html.CheckBoxFor(m => Model.Collections[i].IsChecked)
+                            <p>@Model.Collections[i].Title</p>
+                            @Html.HiddenFor(m => Model.Collections[i].Id)
+                            @Html.HiddenFor(m => Model.Collections[i].Title)
+                        </li>
+                    }
                 </ul>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-
+            <button type="submit" class="post-details-collection-form-button">Uppdatera</button>
         </form>
     </div>
     <div class="details-desc-div">
@@ -86,18 +85,3 @@
         </div>
     }
 </div>
-@* SKA KUNNA SE ALLA SAMLINGAR OCH SE VILKA SOM INLÄGGET REDAN LIGGER I OCH TA BORT INLÄGGET FRÅN DE SAMLINGARNA  *@
-<form asp-controller="CollectionPost" asp-action="Create">
-
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="@postId" />
-
-    <div class="form-group">
-        <label for="cId" class="control-label"></label>
-        <select class="form-control" name="cId" id="cId" asp-items="ViewBag.CollectionId"></select>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
-
-</form>
