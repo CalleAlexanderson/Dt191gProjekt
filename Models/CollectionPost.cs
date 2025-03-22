@@ -10,7 +10,7 @@ public class CollectionPost {
 
     public Collection? Collection {get; set;}
 
-    public int CollectionId {get; set;}
+    public int? CollectionId {get; set;}
 
     [NotMapped]
     public bool IsChecked {get; set;}
