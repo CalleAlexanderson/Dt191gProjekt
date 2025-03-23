@@ -9,7 +9,7 @@
     <a tabindex="-1" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><button class="profile-btn" id="profile-button"><img src="~/user.png" alt="user icon"><span>Profil</span></button></a>
     <div id="profile-dropdown" class="hidden">
         <img src="" alt="">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name</a>
+        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity?.Name</a>
         <form asp-area="Identity" asp-page="/Account/Logout"
             asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button type="submit" >Logout</button>
