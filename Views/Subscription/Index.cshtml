@@ -25,22 +25,25 @@
 
 <h1 class="subs-heading">Prenumerationer</h1>
 
-<section class="subs-div">
-    @for (var i = 0; i < subscriptions.Count; i++)
-    {
-        <a asp-controller="Post" asp-action="Details" asp-route-id="@posts[i].Id">
-            <article class="discover-post">
-                <div class="discover-post-info">
-                    <img src="~/logo.png" alt="" class="discover-post-img">
-                    <div>
-                        <h3>@Html.DisplayFor(modelItem => posts[i].Title)</h3>
+@if (subscriptions.Count > 0)
+{
+    <section class="subs-div">
+        @for (var i = 0; i < subscriptions.Count; i++)
+        {
+            <a asp-controller="Post" asp-action="Details" asp-route-id="@posts[i].Id">
+                <article class="discover-post">
+                    <div class="discover-post-info">
+                        <img src="~/logo.png" alt="" class="discover-post-img">
+                        <div>
+                            <h3>@Html.DisplayFor(modelItem => posts[i].Title)</h3>
 
-                        <p>@Html.DisplayFor(modelItem => posts[i].Date), @Html.DisplayFor(modelItem =>
-                            posts[i].User.UserName)
+                            <p>@Html.DisplayFor(modelItem => posts[i].Date), @Html.DisplayFor(modelItem =>
+                                                        posts[i].User.UserName)
                     </p>
                 </div>
             </div>
         </article>
     </a>
         }
-</section>
+    </section>
+}

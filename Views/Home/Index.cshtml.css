@@ -1,21 +1,25 @@
 .index-main-div {
     background-color: #688ec0;
     padding: 0 0 20px;
+    min-height: calc(31vh - 73px);
 }
 
 .index-create-div {
     background-color: #5eceb2;
     padding: 0 0 20px;
+    min-height: calc(23vh - 50px);
 }
 
 .index-subscribe-div {
     background-color: #936fd6;
     padding: 0 0 20px;
+    min-height: calc(23vh - 50px);
 }
 
 .index-collection-div {
     background-color: #ecb959;
     padding: 0 0 20px;
+    min-height: calc(23vh - 50px);
 }
 
 .index-main-div h1,

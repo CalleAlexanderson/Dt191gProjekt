@@ -8,41 +8,45 @@
 <a asp-action="Index"><button class="return-button">← Tillbaka</button></a>
 
 <h1>@Html.DisplayFor(model => model.Title)</h1>
-<p class="collection-details-info">Klicka på rutorna för att välja vilka inlägg som ska tas bort</p>
+@if (Model.Posts?.Count > 0){<p class="collection-details-info">Klicka på rutorna för att välja vilka inlägg som ska tas bort</p>}
 @* SKA KUNNA TA BORT DE OLIKA INLÄGGEN HÄRIFRÅN GENOM ATT AVCHECKA BOXAR  *@
 <form asp-action="EditCollectionPosts">
     <input type="hidden" asp-for="Id" />
-    <div class="details-collection-form-div">
-        @{
-            for (var i = 0; i < Model.Posts?.Count; i++)
-            {
-                <div class="collection-article-div">
-                    <a asp-controller="Post" asp-action="Details" asp-route-id="@Model.Posts[i].PostId">
-                        <article class="discover-post">
-                            <div class="discover-post-info">
-                                <img src="~/logo.png" alt="" class="discover-post-img">
-                                <div>
-                                    <h3>@Html.DisplayFor(modelItem => Model.Posts[i].Post.Title)</h3>
+    @if (Model.Posts?.Count > 0)
+    {
+        <div class="details-collection-form-div">
+            @{
+                for (var i = 0; i < Model.Posts?.Count; i++)
+                {
+                    <div class="collection-article-div">
+                        <a asp-controller="Post" asp-action="Details" asp-route-id="@Model.Posts[i].PostId">
+                            <article class="discover-post">
+                                <div class="discover-post-info">
+                                    <img src="~/logo.png" alt="" class="discover-post-img">
+                                    <div>
+                                        <h3>@Html.DisplayFor(modelItem => Model.Posts[i].Post.Title)</h3>
 
-                                    <input type="hidden" asp-for="@Model.Posts[i].Id" />
+                                        <input type="hidden" asp-for="@Model.Posts[i].Id" />
 
 
-                                    <p>@Html.DisplayFor(modelItem => Model.Posts[i].Post.Date)</p>
-                                    <p>@Html.DisplayFor(modelItem => Model.Posts[i].Post.User.UserName)</p>
+                                        <p>@Html.DisplayFor(modelItem => Model.Posts[i].Post.Date)</p>
+                                        <p>@Html.DisplayFor(modelItem => Model.Posts[i].Post.User.UserName)</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
-                    </a>
+                            </article>
+                        </a>
 
 
-                    <div class="collection-details-checkbox-div">
-                        @Html.CheckBoxFor(m => Model.Posts[i].IsChecked)
+                        <div class="collection-details-checkbox-div">
+                            @Html.CheckBoxFor(m => Model.Posts[i].IsChecked)
+                        </div>
                     </div>
-                </div>
+                }
             }
-        }
-    </div>
-    <button type="submit" class="publish-button remove-post-button">Ta bort inlägg</button>
+        </div>
+        <button type="submit" class="publish-button remove-post-button">Ta bort inlägg</button>
+    }
+
 </form>
 
 <div class="publish-div">

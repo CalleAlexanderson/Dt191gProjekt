@@ -11,17 +11,17 @@
             <div asp-validation-summary="ModelOnly" ></div>
             <div class="title-div">
                 <label asp-for="Title" class="visually-hidden" ></label>
-                @Html.TextArea("Title", new { @class = "desc-input", placeholder ="The perfect Title!" })
+                @Html.TextArea("Title", new { @class = "desc-input", placeholder ="Blogginläggets titel" })
                 <span asp-validation-for="Title"></span>
             </div>
             <div class="desc-div">
                 <label asp-for="Description" class="visually-hidden" ></label>
-                @Html.TextArea("Description", new { @class = "desc-input", placeholder ="Your posts perfect description! (Max 200 characters)" })
+                @Html.TextArea("Description", new { @class = "desc-input", placeholder ="Beskrivning för blogginlägg (Max 200 tecken)" })
                 <span asp-validation-for="Description" ></span>
             </div>
             <div class="content-div">
                 <label asp-for="Content" class="visually-hidden"></label>
-                @Html.TextArea("Content", new { @class = "", placeholder ="Your posts content goes here!" })
+                @Html.TextArea("Content", new { @class = "", placeholder ="Bloginläggets innehåll" })
                 <span asp-validation-for="Content" ></span>
             </div>
             <div  class="publish-div">

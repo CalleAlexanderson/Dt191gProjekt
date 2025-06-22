@@ -65,22 +65,31 @@ namespace Backend.Controllers
                 ViewData["own"] = "false";
             }
 
-            if (user == null) {
-                ViewData["loggedIn"] = "false";
-            } else {
-                ViewData["loggedIn"] = "true";
-            }
-
-            // skickar med om post är prenumererad på
-            var subscription = await _context.Subscriptions.Where(x => x.PostId == post.Id).ToListAsync();
-            if (subscription.Count != 0)
+            if (user == null)
             {
-                ViewData["subId"] = subscription[0].Id;
-                ViewData["sub"] = "true";
+                ViewData["loggedIn"] = "false";
             }
             else
             {
-                ViewData["sub"] = "false";
+                ViewData["loggedIn"] = "true";
+                ViewData["userId"] = user.Id;
+                // skickar med om post är prenumererad på
+                var subscription = await _context.Subscriptions.Where(x => x.PostId == post.Id).ToListAsync();
+                if (subscription.Count != 0)
+                {
+                    for (var i = 0; i < subscription.Count; i++)
+                    {
+                        if (subscription[i].UserId == user.Id)
+                        {
+                            ViewData["subId"] = subscription[0].Id;
+                            ViewData["sub"] = "true";
+                        }
+                    }
+                }
+                else
+                {
+                    ViewData["sub"] = "false";
+                }
             }
 
             ViewData["CollectionId"] = new SelectList(_context.Collections, "Id", "Title");
@@ -90,25 +99,17 @@ namespace Backend.Controllers
             ViewData["inCollection"] = inCollection;
             ViewData["detailsCollection"] = detailsCollection;
 
-            for(var i = 0; i < inCollection?.Count; i++) 
+            for (var i = 0; i < inCollection?.Count; i++)
             {
-                // Console.WriteLine("Posten: "+inCollection[i].Post.Title+" är i collection: "+inCollection[i].Collection.Title);
                 // kollar om posten redan är i en samling 
                 for (var index = 0; index < detailsCollection.Count; index++)
                 {
                     if (inCollection[i].CollectionId == detailsCollection[index].Id)
                     {
-                        // Console.WriteLine("Posten: "+inCollection[i].Post.Title+" collection mathcar med collection: " +detailsCollection[index].Title);
-                        // Console.WriteLine("is checked: "+detailsCollection[i].IsChecked);
                         detailsCollection[index].IsChecked = true;
                         break;
                     }
                 }
-            }
-
-            for (var i = 0; i < detailsCollection.Count; i++)
-            {
-                    // System.Console.WriteLine("checked new loop: "+detailsCollection[i].IsChecked);
             }
 
             post.Collections = detailsCollection;

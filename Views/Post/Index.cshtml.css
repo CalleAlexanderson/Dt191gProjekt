@@ -37,7 +37,7 @@
         width: auto;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        max-width: none;
+        max-width: 1000px;
     }
 }
 

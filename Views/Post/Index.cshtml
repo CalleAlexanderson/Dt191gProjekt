@@ -25,7 +25,7 @@
             </div>
 
             <div class="discover-post-text">
-                @* Kollar om desc är tom och om den är det så skapas en desc med content *@
+                @* Kollar om desc är tom och om den inte är det så skapas en desc med content *@
                 @if (desc != null) {
                 <p>@Html.DisplayFor(modelItem => item.Description) : 
             <a asp-action="Details" asp-route-id="@item.Id" class="discover-post-readmore">Läs mer</a></p>

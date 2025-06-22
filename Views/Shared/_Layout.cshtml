@@ -44,10 +44,13 @@
                                     asp-action="index"><button class="nav-discover-button">Samlingar</button></a>
                             </li>
                             <li>
-                                <form asp-area="Identity" asp-page="/Account/Logout"
+                                @* visar bara knappen om användaren är inloggad *@
+                                @if(User.Identity.IsAuthenticated){
+                                    <form asp-area="Identity" asp-page="/Account/Logout"
                                     asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                     <button type="submit" class="nav-discover-button">Logout</button>
                                 </form>
+                                }
                             </li>
                         </ul>
                     </div>

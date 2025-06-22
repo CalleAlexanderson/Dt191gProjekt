@@ -29,7 +29,9 @@
 
 <h1 class="your-collection-heading">Dina samlingar</h1>
 
-<section class="your-collection-div">
+@if (yourCollection.Count > 0)
+{
+    <section class="your-collection-div">
     @for (var i = 0; i < yourCollection.Count; i++)
     {
         <a asp-action="Details" asp-route-id="@yourCollection[i].Id">
@@ -44,4 +46,5 @@
         </a>
 
     }
-</section>
+    </section>
+}

@@ -38,9 +38,17 @@ namespace Backend.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var subscription = await _context.Subscriptions.Where(x => x.PostId == id).ToListAsync();
-            if (subscription != null)
+            IdentityUser? user = await _userManager.GetUserAsync(HttpContext.User);
+            if (subscription.Count != 0)
             {
-                _context.Subscriptions.Remove(subscription[0]);
+                for (var i = 0; i < subscription.Count; i++)
+                {
+                    if (subscription[i].UserId == user.Id)
+                    {
+                        _context.Subscriptions.Remove(subscription[i]);
+                    }
+                }
+
             }
 
             await _context.SaveChangesAsync();
@@ -64,11 +72,18 @@ namespace Backend.Controllers
             // kollar om posten redan är prenumererad på
             var subscription1 = await _context.Subscriptions.Where(x => x.PostId == subscription.PostId).ToListAsync();
             if (subscription1.Count != 0)
-            {  
-                // skickar användaren tillbaka till posten de var på
-                return RedirectToAction("Details", "Post", new { Id = subscription.PostId });
+            {
+                for (var i = 0; i < subscription1.Count; i++)
+                {
+                    if (subscription1[i].UserId == user.Id)
+                    {
+                        // skickar användaren tillbaka till posten de var på
+                        return RedirectToAction("Details", "Post", new { Id = subscription.PostId });
+                    }
+                }
+
             }
-            
+
             if (ModelState.IsValid)
             {
                 _context.Add(subscription);

@@ -5,6 +5,7 @@
     var subscribe = ViewData["sub"];
     var loggedIn = ViewData["loggedIn"];
     var Id = ViewData["subId"];
+    var userId = ViewData["userId"] as string;
     var owns = ViewData["own"];
     var postId = Model.Id;
     var collections = ViewData["detailsCollection"] as List<Collection>;
@@ -54,13 +55,17 @@
                 @* genererar checkboxar för varje samling *@
                 <div>
                     <ul>
-                        @for (var i = 0; i < Model.Collections.Count; i++)
+                        @for (var i = 0; i < Model.Collections?.Count; i++)
                         {
                             <li>
-                                @Html.CheckBoxFor(m => Model.Collections[i].IsChecked)
-                                <p>@Model.Collections[i].Title</p>
-                                @Html.HiddenFor(m => Model.Collections[i].Id)
+                                @* visar bara de collections som den inloggade användaren skapat *@
+                                @if (Model.Collections[i].UserId == userId)
+                                {
+                                    @Html.CheckBoxFor(m => Model.Collections[i].IsChecked)
+                                    <p>@Model.Collections[i].Title</p>
+                                }
                                 @Html.HiddenFor(m => Model.Collections[i].Title)
+                                @Html.HiddenFor(m => Model.Collections[i].Id)
                             </li>
                         }
                     </ul>

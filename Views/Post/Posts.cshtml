@@ -23,25 +23,27 @@
 
 <a asp-action="Index" asp-controller="Subscription"><button class="my-subs-button">Prenumerationer</button></a>
 <a asp-action="Index" asp-controller="Collection"><button class="my-collection-button">Samlingar</button></a>
-<a asp-action="Create"><button class="create-button" >Skapa blogginlägg</button></a>
+<a asp-action="Create"><button class="create-button">Skapa blogginlägg</button></a>
 
 <h1 class="your-posts-heading">Dina inlägg</h1>
+@if (yourPosts.Count > 0)
+{
+    <section class="your-posts-div">
+        @for (var i = 0; i < yourPosts.Count; i++)
+        {
+            <a asp-action="Details" asp-route-id="@yourPosts[i].Id">
+                <article class="discover-post">
+                    <div class="discover-post-info">
+                        <img src="~/logo.png" alt="" class="discover-post-img">
+                        <div>
+                            <h3>@Html.DisplayFor(modelItem => yourPosts[i].Title)</h3>
 
-<section class="your-posts-div">
-    @for (var i = 0; i < yourPosts.Count; i++)
-    {
-        <a asp-action="Details" asp-route-id="@yourPosts[i].Id">
-            <article class="discover-post">
-                <div class="discover-post-info">
-                    <img src="~/logo.png" alt="" class="discover-post-img">
-                    <div>
-                        <h3>@Html.DisplayFor(modelItem => yourPosts[i].Title)</h3>
-
-                        <p>@Html.DisplayFor(modelItem => yourPosts[i].Date)</p>
+                            <p>@Html.DisplayFor(modelItem => yourPosts[i].Date)</p>
+                        </div>
                     </div>
-                </div>
-            </article>
-        </a>
+                </article>
+            </a>
 
-    }
-</section>
+        }
+    </section>
+}

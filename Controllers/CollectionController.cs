@@ -26,14 +26,19 @@ namespace Backend.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
+            IdentityUser? user = await _userManager.GetUserAsync(HttpContext.User);
             List<Collection> collections = await _context.Collections.ToListAsync();
             List<int> collectionSizes = [];
 
             // skapar en lista med mängden inlägg i de olika samlingarna användaren skapat
             for (var i = 0; i < collections.Count; i++)
             {
-                List<CollectionPost> collectionPosts = await _context.CollectionPosts.Where(t => t.CollectionId == collections[i].Id).ToListAsync();
-                collectionSizes.Add(collectionPosts.Count);
+                if (collections[i].UserId == user.Id)
+                {
+                    List<CollectionPost> collectionPosts = await _context.CollectionPosts.Where(t => t.CollectionId == collections[i].Id).ToListAsync();
+                    collectionSizes.Add(collectionPosts.Count);
+                }
+                
             }
             ViewData["collectionSizes"] = collectionSizes.ToArray();
             
